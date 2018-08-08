@@ -13,62 +13,37 @@
   @each $sprite in $svg-spritesheet-sprites
     .svg--#{nth($sprite, 1)}
       +svgi($sprite)
-+cm('form')
-.text-danger
-  color: $text-danger
-  text-align: left
-.form-group.has-error
-  .form-control 
-    border-color: $form-control-error-border-color
-[type=submit]:disabled
-  animation: progress-bar-stripes 2s linear infinite
-  background-image: $btn-submit-loading-bg
-  background-size: 40px 40px
-@keyframes progress-bar-stripes
-  from
-    background-position: 40px 0
-  to
-    background-position: 0 0
-+cm('modal')
-.modal
-  -webkit-overflow-scrolling: touch
-  transform: translateZ(0)
-.modal.show 
-  display: flex !important
-  align-items: center
-.modal-dialog
-  position: relative
-  margin: auto
-.html, 
-.body
-  display: flex
-  margin: 0
-.body
-  flex-direction: column
-  flex: 0 0 100%
-  max-width: 100%
-  min-height: 100vh
-.main
-  flex-grow: 1
-.link
+
+%link
   text-decoration: none
   transition: all .3s ease-out
   &:hover,
   &:focus
     text-decoration: none
-.btn
+%btn
   display: inline-flex
   align-items: center
   justify-content: center
   border-radius: 0
   background-color: transparent
-  @extend .link
+  @extend %link
   &:focus
     box-shadow: none
   &--default
   &--primary
   &--secondary
   &--simple
+.btn
+  &--pure
+    margin: 0
+    padding: 0
+    border: none
+    background-color: transparent
+    border-radius: 0
+    box-shadow: none
+.img-fluid
+  max-width: 100%
+  height: auto
 
 +cm("Typography")
 .hidden-accessible
@@ -80,4 +55,391 @@
   padding: 0 !important
   position: absolute !important
   width: 1px !important
+
 +comment("home page style")
+
++comment("section header style")
+.header
+  &#header
+    +r($md)
+      padding: 20px 0 10px
+  &__container
+    max-width: 900px
+    margin:
+      left: auto
+      right: auto
+  &__menu
+  &__logo
+    display: block
+    max-width: 134px
+  &__logo-group
+    position: absolute
+    +r($md)
+      position: static
+
+
++comment("section signin-area style")
+.signin-area
+  display: flex
+  flex-wrap: wrap
+  margin:
+    left: -10px
+    right: -10px
+  justify-content: flex-end
+  align-items: center
+  &__info
+    +col(auto)
+    padding:
+      left: 10px
+      right: 10px
+  &__phone
+    +col(auto)
+    display: block
+    padding: 18px 18px 18px 12px
+  &__profile
+    +col(auto)
+    padding:
+      left: 10px
+      right: 10px
+  &__menu
+    +col(24)
+    padding:
+      left: 10px
+      right: 10px
+    +r($sm)
+      +col(auto)
+      order: -1
+    +r($lg)
+      margin-right: auto
+
+.hr-menu
+  &#navigation-menu
+    display: block
+    +r($md)
+      display: inline-block
+  &__nav
+    text-align: center
+    +r($sm)
+      text-align: right
+.hr-nav
+  &__btn
+    padding: 6px 10px
+    border: none
+    background-color: transparent
+    font: 400 13px/17px $main-font
+    letter-spacing: .6px
+    color: #000
+    transition: all .3s ease-out
+    &:active,
+    &.active
+      box-shadow: none
+      color: #5bc0de
+    &:hover
+      background-color: transparent
+      color: #337ab7 * 1.2
+    &:focus
+      color: #337ab7 * 1.4
+    &--active
+      color: #337ab7
+      &:active,
+      &:hover,
+      &:focus
+        color: #337ab7
+.sn-profile
+  &__dropdown
+    padding: 10px
+.pl-figure
+  border-radius: 50%
+  overflow: hidden
+  max-width: 51px
+.hd-phone
+  color: #666
+  text-decoration: none
+  transition: all .3s ease-out
+  &:hover,
+  &:focus
+    text-decoration: none
+    color: #337ab7
+  &:active,
+    color: #337ab7 * 1.2
+  &:focus
+    text-decoration: none
+    color: #337ab7
+  &__icon
+    font-size: 24px
+
++comment("section in-intro style")
+.in-heading
+  font: 400 37px/47px $main-font
+  color: #f2f2f2
+  letter-spacing: 6px
+.in-intro
+  position: relative
+  margin-bottom: 24px
+  padding:
+    top: 30px
+    bottom: 30px
+  min-height: 97px
+  background-color: #4C5B84
+  background-repeat: no-repeat
+  background-position: 50% 50%
+  background-size: cover
+  z-index: 1
+  &:before
+    +coverdiv
+    background-image: url(/img/intro-bg-2.svg)
+    background-repeat: no-repeat
+    background-position:  20px 16px
+    background-size: contain
+    z-index: -1
+    +r($md)
+      content: ''
+    +r($lg)
+  &__container
+    margin:
+      left: auto
+      right: auto
+    max-width: 885px
+    min-height: inherit
+    padding:
+      left: 15px
+      right: 15px
+  &__row
+    display: flex
+    flex-wrap: wrap
+    margin-right: -15px
+    margin-left: -15px
+    align-items: center
+    justify-content: flex-end
+    min-height: inherit
+  &__col
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 15px
+    padding-left: 15px
+  &__heading
+    margin: 0
+    text-align: center
+    +r($md)
+      text-align: right
+
++comment("section wm-welcome style")
+.wm-heading
+  font: 700 27px/34px $main-font
+  color: #000
+  letter-spacing: 1.26px
+.wm-welcome
+  margin-bottom: 4px
+  padding: 12px 0 10px
+  background-color: #dadada
+  text-align: center
+  &__container
+    margin:
+      left: auto
+      right: auto
+    max-width: 774px
+  &__heading
+    margin: 0
+
++comment("section nf-notify style")
+.nf-text
+  margin-bottom: 5px
+  font: 500 16px/20px $main-font
+  color: #000
+  letter-spacing: 1.25px
+  mark
+    padding: 0
+    background-color: transparent
+    color: #136c91
+  a
+    font: inherit
+    font-style: italic
+
+.nf-link
+  font: 500 16px/20px $main-font
+  color: #787878
+  letter-spacing: 1.25px
+  font-style: italic
+  text-decoration: none
+  transition: all .3s ease-out
+  &:active
+    color: #5bc0de
+  &:hover
+    color: #337ab7 * 1.2
+  &:focus
+    color: #337ab7 * 1.4
+    text-decoration: none
+.nf-notify
+  margin:
+    bottom: 20px
+  padding: 8px 0 6px
+  background-color: #f0f0f0
+  text-align: center
+  &__container
+    margin:
+      left: auto
+      right: auto
+    max-width: 774px
+
+
++comment("section cm-panel style")
+.cm-heading
+  font: 600 16px/21px $main-font
+  color: #ffffff
+  letter-spacing: 1.25px
+.cm-text
+  font: 500 16px/21px $main-font
+  color: #000
+  letter-spacing: 1.25px
+.cm-figure
+  display: flex
+  flex-wrap: wrap
+  justify-content: center
+  align-items: center
+  width: 97px
+  height: 97px
+  margin: 0
+  border-radius: 50%
+  overflow: hidden
+  background-color: #2eaed5
+  &__img
+    @extend .img-fluid
+    +col(60px)
+.cm-item
+  position: relative
+  display: flex
+  flex-wrap: wrap
+  align-items: center
+  min-height: 119px
+  padding: 7px 7px 7px 10px
+  border-radius: 35px 4px 35px 4px
+  background-color: #dadada
+  font: 500 16px/20px $main-font
+  color: #000
+  letter-spacing: 1.25px
+  text-decoration: none
+  transition: all .3s ease-out
+  &:hover,
+  &:focus
+    text-decoration: none
+  &:hover
+    background-color: #d9edf7
+    color: #337ab7
+  &:active
+    box-shadow: 0 0 5px 3px #d9edf7
+  &:focus
+    color: #337ab7
+  &__figure
+    margin-right: 16px
+  &__text
+    +col
+    margin-bottom: 0
+    color: inherit
+  .text-primary
+    position: absolute
+    top: 14px
+    right: 14px
+.cm-list
+  $this: &
+  margin: 0
+  padding: 0
+  list-style-type: none
+  &__item
+    margin:
+      right: auto
+      bottom: 16px
+      left: auto
+    max-width: 370px
+    &:nth-child(even)
+      .cm-item__figure
+        background-color: #347bb1
+  &__link
+
+.cm-panel
+  $this: &
+  &__container
+    margin:
+      left: auto
+      right: auto
+    max-width: 774px
+  &__row
+    display: flex
+    flex-wrap: wrap
+    margin-right: -15px
+    margin-left: -15px
+    +r($md)
+      margin:
+        left: -1px
+        right: -1px
+  &__col
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 15px
+    padding-left: 15px
+    +r($md)
+      padding:
+        left: 1px
+        right: 1px
+      &:nth-child(odd)
+        .cm-card__content
+          margin:
+            right: -1px
+          border-right: 1px solid #7e7e7e
+    &--1
+      +r($md)
+        +col(12)
+        .cm-card__content
+          padding-right: 24px
+    &--2
+      +r($md)
+        +col(12)
+        .cm-card__content
+          padding-left: 18px
+  &__card
+    height: 100%
+.cm-card
+  display: flex
+  flex-wrap: wrap
+  flex-direction: column
+  &__header
+    margin:
+      bottom: 16px
+    padding: 11px 18px
+    background-color: #347bb1
+  &__content
+    flex-grow: 1
+  &__heading
+    margin: 0
+#preview-container .cm-card .panel-body
+  margin: 19px 3px 0
+  
++comment("section footer style")
+.footer
+  &__container
+    border: none
+  &__nav    
+    border-top: 1px solid #bdbdbd
+    +r($md)
+      display: inline-block
+      vertical-align: top
+.ft-nav
+  padding: 13px 20px
+  +r($md)
+    padding: 
+      top: 26px
+      bottom: 26px
+
+  &__link
+    display: block
+    padding: 7px 22px
+    font: 400 13px/17px $main-font
+    color: #000
+    text-transform: uppercase
+    letter-spacing: .3px
+    +r($md)
+      display: inline
+      padding: 
+        top: 26px
+        bottom: 26px

@@ -38,7 +38,6 @@ gulp.task("sass", () => {
       css: pkg.path.src.css,
       sass: pkg.path.src.sass,
       image: pkg.path.src.img,
-      outputStyle: 'expanded'
     })
     .on("error", $.sass.logError))
     .pipe($.cached("sass_compile"))
@@ -62,7 +61,6 @@ gulp.task("css", ["sass"], () => {
     .pipe($.plumber({errorHandler: onError}))
     .pipe($.plumberNotifier())
     .pipe($.newer({dest: pkg.path.dist.css}))
-    .pipe($.cssnano(cssnanoConfig))
     .pipe(gulp.dest(pkg.path.dist.css))
     .pipe(prod ? $.rename({suffix: '.min', prefix : ''}) : $.util.noop())
     .pipe(prod ? $.header(banner, {pkg: pkg}) : $.util.noop())
