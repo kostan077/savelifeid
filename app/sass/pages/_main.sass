@@ -443,3 +443,96 @@
       padding: 
         top: 26px
         bottom: 26px
+
++comment("page Medical Profile")
+
++comment("section mp-profile style")
+.mp-profile
+  &__container
+    max-width: 875px
+    margin: 
+     left: auto
+     right: auto
+  &__list
+
+.mp-list
+  $this: &
+  display: flex
+  justify-content: space-between
+  margin: 0
+  padding: 6.25em .625em 1em
+  counter-reset: list
+  list-style-type: none
+  +cm("!* ")
+  +cm("* You can zoom this list, by changing font-size value")
+  +cm("*")
+  font-size: 16px
+  +cm("*")
+  +cm("*")
+  +cm("*!")
+  &__item
+    position: relative
+    +col
+    cursor: pointer
+    color: #000
+    z-index: 1
+    &:hover
+      color: #337ab7
+    &:active
+      color: #337ab7 * 1.4
+
+    &:after
+      content: ''
+      counter-increment: list
+      width: 1.25em
+      height: 1.25em
+      transform: translateX(-50%)
+      display: flex
+      justify-content: center
+      align-items: center
+      background-color: #3d91b5
+      border-radius: 50%
+      font: 700 1em/1 $main-font
+      color: #fff
+      letter-spacing: -1.15px
+      transition: all .15s linear
+      z-index: 1
+    &:before
+      content: ''
+      position: absolute
+      top: 50%
+      left: 0
+      transform: translateY(-50%)
+      width: 100%
+      height: .5em
+      background-color: #54b9e4
+      z-index: -1
+    &:last-of-type
+      &:before
+        content: none
+    &:nth-child(-n+9)
+      &:after
+        letter-spacing: 0
+    &--active
+      &:after
+        content: counter(list)
+        box-shadow: 0 0 0 .188em #64caf0
+      &:before
+        background-color: #bdbdbd
+      &~#{$this}__item
+        &:after
+          background-color: #bdbdbd
+        &:before
+          background-color: #bdbdbd
+
+  &__text
+    position: absolute
+    top: -.325em
+    left: .25em
+    transform: translateY(-50%) rotate(-39deg)
+    transform-origin: 0 0
+    font: 400 .750em/1 $main-font
+    color: inherit
+    letter-spacing: 0.7px
+    white-space: nowrap
+    transition: all .3s ease-out
