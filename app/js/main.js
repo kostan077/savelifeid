@@ -149,25 +149,40 @@ const GRVE = GRVE || {};
       svg4everybody()
     },
     medicalProfile() {
-      const $items =             $(".mp-list__item")
-      const activeClass =        "mp-list__item--active"
-      $items.on("click", function() {
-        const $this =            $(this)
-        const id =               $this.data("select-control-id")
-        const selectTarget =     '#md-profile-select'
-        const $selectControl =   $(selectTarget)
+      const $items = $('[data-tabs-control-id]');
+      const activeClass = 'mp-list__item--active';
+      const control = '.mp-list';
+      const controlItemActive = 'mp-list__item--active';
+      const controlItem = '.mp-list__item';
+      const tabItemActive = 'mp-content__item--active';
+      const tabItem = '.mp-content__item';
 
-        $(this)
-          .addClass(activeClass)
-          .siblings($items)
-          .removeClass(activeClass)
-        
+      $items.on('click', function() {
+        const $this = $(this);
+        const target = $this.data('tabs-control-id');
+        const selectTarget = '#md-profile-select';
+        const $contentItem = $(`[data-tabs-content-id="${target}"]`);
+        const $selectControl = $(selectTarget);
+
+        $this
+          .closest(controlItem)
+          .addClass(controlItemActive)
+          .siblings(controlItem)
+          .removeClass(controlItemActive);
+
+        $contentItem
+          .closest(tabItem)
+          .addClass(tabItemActive)
+          .siblings(tabItem)
+          .removeClass(tabItemActive);
+
         // Select option
-        $(`${selectTarget} option`).filter(function() { 
-            return ($(this).data("select-id") == id)
-        }).prop('selected', true)
-        $selectControl.trigger("change")
-
+        $(`${selectTarget} option`)
+          .filter(function() {
+            return $(this).data('tabs-content-id') == target;
+          })
+          .prop('selected', true);
+        $selectControl.trigger('change');
       })
     }
   }

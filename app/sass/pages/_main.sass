@@ -41,6 +41,37 @@
     background-color: transparent
     border-radius: 0
     box-shadow: none
+    &:not(:disabled):not(.disabled)
+      cursor: pointer
+  &--primary-left,
+  &--primary-right
+    position: relative
+    margin: 0
+    padding: 8px 15px
+    border: none
+    background-color: #54b9e4
+    border-radius: 8px
+    min-width: 133px
+    box-shadow: none
+    font: 700 13px/16px $main-font
+    color: #fff
+    letter-spacing: -.4px
+    text-transform: uppercase
+    &:not(:disabled):not(.disabled)
+      cursor: pointer
+    &:before
+      position: absolute
+      top: 50%
+      transform: translateY(-50%)
+  &--primary-left
+    &:before
+      content: '←'
+      left: 10px
+  &--primary-right
+    &:before
+      content: '→'
+      right: 10px
+
 .img-fluid
   max-width: 100%
   height: auto
@@ -448,12 +479,37 @@
 
 +comment("section mp-profile style")
 .mp-profile
-  &__container
+  &__wrapper
     max-width: 875px
     margin: 
      left: auto
      right: auto
+  &__container
+    max-width: 780px
+    margin: 
+     left: auto
+     right: auto
+  &__row
+    display: flex
+    flex-wrap: wrap
+    margin-right: -15px
+    margin-left: -15px
+  &__col
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 15px
+    padding-left: 15px
+    &--1
+      +col
+      padding-left: 73px
+    &--2
+      +col(auto)
   &__list
+  .cm-card
+    margin-top: 48px
+    &__text
+      @extend .hidden-accessible
 
 .mp-list
   $this: &
@@ -536,3 +592,104 @@
     letter-spacing: 0.7px
     white-space: nowrap
     transition: all .3s ease-out
+
++comment("section mp-content style")
+.mp-heading
+  font: 600 16px/22px $main-font
+  color: #000
+  letter-spacing: 1.25px
+.mp-descr
+  font: 400 13px/18px $main-font
+  color: #000
+  letter-spacing: .75px
+.mp-text
+  font: 400 14px/18px $main-font
+  color: #757575
+.mp-content
+  position: relative
+  &__item
+    width: 100%
+    height: 1px
+    overflow: hidden
+    clip: rect(0 0 0 0)
+    position: absolute
+    &--active
+      clip: rect(auto auto auto auto)
+      overflow: visible
+      position: relative
+      height: auto
+.mp-header
+  position: relative
+  padding-top: 45px
+  min-height: 100px
+  z-index: 1
+  &:before
+    content: attr(data-tabs-content-counter)
+    position: absolute
+    width: 212px
+    top: 0
+    left: 8px
+    transform: translateX(-50%)
+    font: 700 120px/112px $main-font
+    color: #e4f2fa
+    text-align: center
+    z-index: -1
+  &__heading
+    margin-bottom: 4px
+.mp-btn-group
+  display: flex
+  flex-wrap: wrap
+  &__btn
+    position: relative
+    width: 100%
+    min-height: 1px
+    +col(auto)
+    &--right
+      margin-left: auto
+.mp-rdbox-btn
+  $this: &
+  margin: 10px 0
+  color: #4d4d4d
+  &__icon
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: center
+    flex: 0 0 auto
+    margin-right: 7px
+    width: 15px
+    height: 15px
+    border: 2px solid currentColor
+    color: #ebebeb
+  &__svg
+    position: absolute
+    margin: auto
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
+    color: inherit
+    opacity: 0
+    font-size: 11px
+    color: currentColor
+    transition: opacity .2s ease-out
+  &__text
+    margin-right: 3px
+    font: 100 14px/21px $main-font
+    color: #777
+  input[type="radio"]
+    @extend .hidden-accessible
+    &+ label
+      display: flex
+      flex-direction: row
+      justify-content: flex-start
+      align-items: center
+      margin: 0
+      border: 1px solid #989898
+      cursor: pointer
+  input[type="radio"]:checked 
+    &+ label
+      #{$this}
+        &__icon    
+          color: #f1cb2e
+        &__svg
+          opacity: 1
