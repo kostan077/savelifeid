@@ -149,41 +149,89 @@ const GRVE = GRVE || {};
       svg4everybody()
     },
     medicalProfile() {
-      const $items = $('[data-tabs-control-id]');
-      const activeClass = 'mp-list__item--active';
-      const control = '.mp-list';
-      const controlItemActive = 'mp-list__item--active';
-      const controlItem = '.mp-list__item';
-      const tabItemActive = 'mp-content__item--active';
-      const tabItem = '.mp-content__item';
+      const $items =              $('[data-tabs-control-id]')
+      const $navigate =           $("[data-tabs-navigation]")
+      const control =             '.mp-list'
+      const controlItemActive =   'mp-list__item--active'
+      const controlItem =         '.mp-list__item'
+      const tabItemActive =       'mp-content__item--active'
+      const tabItem =             '.mp-content__item'
+
+      $navigate.on("click", function(e) {
+        const $this =           $(this)
+        const value =           $this.data("tabs-navigation")
+ 
+        const $activeControl =  $items.filter('.' + controlItemActive)
+        let indexControl =      $activeControl.index()
+        let $currentControl
+        let currentControlTarget
+        let $contentItem
+
+        switch(value) {
+          case 'next':
+            indexControl += 1
+            break;
+          case 'prev':
+            indexControl -= 1
+            break;
+        }
+
+        if (indexControl < 0 || indexControl > $items.length - 1) return 
+
+        $currentControl = $items.eq(indexControl)
+
+        currentControlTarget = $currentControl.data('tabs-control-id')
+        $contentItem = $(`[data-tabs-content-id="${currentControlTarget}"]`)
+
+        console.log(currentControlTarget)
+
+        $currentControl
+          .addClass(controlItemActive)
+          .siblings(controlItem)
+          .removeClass(controlItemActive)
+
+        $contentItem
+          .eq(indexControl)
+          .addClass(tabItemActive)
+          .siblings(tabItem)
+          .removeClass(tabItemActive)
+
+        changeProfileSelect(currentControlTarget)
+        e.preventDefault()
+      })
 
       $items.on('click', function() {
-        const $this = $(this);
-        const target = $this.data('tabs-control-id');
-        const selectTarget = '#md-profile-select';
-        const $contentItem = $(`[data-tabs-content-id="${target}"]`);
-        const $selectControl = $(selectTarget);
+        const $this = $(this)
+        const target = $this.data('tabs-control-id')
+        const $contentItem = $(`[data-tabs-content-id="${target}"]`)
 
         $this
           .closest(controlItem)
           .addClass(controlItemActive)
           .siblings(controlItem)
-          .removeClass(controlItemActive);
+          .removeClass(controlItemActive)
 
         $contentItem
           .closest(tabItem)
           .addClass(tabItemActive)
           .siblings(tabItem)
-          .removeClass(tabItemActive);
+          .removeClass(tabItemActive)
+
+        changeProfileSelect(target)
+      })
+
+      function changeProfileSelect(target) {
+        const selectTarget = '#md-profile-select'
+        const $selectControl = $(selectTarget)
 
         // Select option
         $(`${selectTarget} option`)
           .filter(function() {
-            return $(this).data('tabs-content-id') == target;
+            return $(this).data('tabs-content-id') == target
           })
           .prop('selected', true);
-        $selectControl.trigger('change');
-      })
+        $selectControl.trigger('change')
+      }
     }
   }
 

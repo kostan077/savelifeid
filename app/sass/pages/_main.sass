@@ -50,6 +50,7 @@
     padding: 8px 15px
     border: none
     background-color: #54b9e4
+    border: 2px solid #54b9e4
     border-radius: 8px
     min-width: 133px
     box-shadow: none
@@ -57,20 +58,31 @@
     color: #fff
     letter-spacing: -.4px
     text-transform: uppercase
+    @extend %link
     &:not(:disabled):not(.disabled)
       cursor: pointer
-    &:before
-      position: absolute
-      top: 50%
-      transform: translateY(-50%)
-  &--primary-left
-    &:before
-      content: '←'
-      left: 10px
-  &--primary-right
-    &:before
-      content: '→'
-      right: 10px
+    &:hover
+      background-color: transparent
+      color: #54b9e4
+    &:focus
+      background-color: #337ab7
+      color: #fff
+      border-color: #337ab7
+
+    &:active
+      border-color: #54b9e4 * 1.1
+      color: #54b9e4 * 1.1
+      background-color: transparent
+
+
+  &__arrow
+    position: absolute
+    top: 50%
+    transform: translateY(-50%)
+    &--left 
+      left: 15px
+    &--right 
+      right: 15px
 
 .img-fluid
   max-width: 100%
@@ -636,6 +648,10 @@
     z-index: -1
   &__heading
     margin-bottom: 4px
+.mp-sub-heading
+  font: 600 13px/16px $main-font
+  color: #000
+  text-transform: uppercase
 .mp-btn-group
   display: flex
   flex-wrap: wrap
@@ -646,50 +662,113 @@
     +col(auto)
     &--right
       margin-left: auto
+.mp-rdbox-group
+  margin:
+    bottom: 13px
 .mp-rdbox-btn
   $this: &
-  margin: 10px 0
+  padding: 6px 0
   color: #4d4d4d
-  &__icon
-    position: relative
-    display: flex
-    align-items: center
-    justify-content: center
-    flex: 0 0 auto
-    margin-right: 7px
-    width: 15px
-    height: 15px
-    border: 2px solid currentColor
-    color: #ebebeb
-  &__svg
-    position: absolute
-    margin: auto
-    top: 50%
-    left: 50%
-    transform: translate(-50%, -50%)
-    color: inherit
-    opacity: 0
-    font-size: 11px
-    color: currentColor
-    transition: opacity .2s ease-out
-  &__text
-    margin-right: 3px
-    font: 100 14px/21px $main-font
-    color: #777
+  &--uppercase
+    input[type="radio"]
+      &+ label
+        text-transform: uppercase
   input[type="radio"]
+    display: block
+    float: none
     @extend .hidden-accessible
     &+ label
-      display: flex
-      flex-direction: row
-      justify-content: flex-start
-      align-items: center
+      width: auto
+      height: auto
+      padding:
+        left: 30px
+      border-radius: 0
+      overflow: visible
       margin: 0
-      border: 1px solid #989898
+      border: none
       cursor: pointer
+      font: 400 13px/16px $main-font
+      color: #000
+      &:before
+        content: '\f111'
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: 0
+        left: 0
+        top: 50%
+        width: 1.692em
+        height: 1.692em
+        transform: translateY(-50%)
+        border: 1px solid #989898
+        border-radius: 50%
+        font: normal normal normal 14px/1 FontAwesome
+        font-size: 14px
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        color: transparent
+        transition: all .3s linear
+      &:after
+        content: none
   input[type="radio"]:checked 
     &+ label
-      #{$this}
-        &__icon    
-          color: #f1cb2e
-        &__svg
-          opacity: 1
+      &:before
+        color: #498fb3
+
+.mp-chkbox-group
+  margin:
+    bottom: 13px
+.mp-chkbox-btn
+  $this: &
+  padding: 6px 0
+  color: #4d4d4d
+  &--uppercase
+    input[type="checkbox"]
+      &+ label
+        text-transform: uppercase
+
+  input[type="checkbox"]
+    display: block
+    float: none
+    @extend .hidden-accessible
+    &+ label
+      width: auto
+      height: auto
+      padding:
+        left: 30px
+      border-radius: 0
+      overflow: visible
+      margin: 0
+      border: none
+      cursor: pointer
+      font: 400 13px/16px $main-font
+      color: #000
+      &:before
+        content: '\f00c'
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: 0
+        left: 0
+        top: 50%
+        width: 1.692em
+        height: 1.692em
+        transform: translateY(-50%)
+        border: 1px solid #989898
+        border-radius: 4px
+        font: normal normal normal 14px/1 FontAwesome
+        font-size: 14px
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        color: transparent
+        transition: all .3s linear
+      &:after
+        content: none
+  input[type="checkbox"]:checked 
+    &+ label
+      &:before
+        color: #498fb3
