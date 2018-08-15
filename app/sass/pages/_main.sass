@@ -44,6 +44,18 @@
     @extend %link
     &:not(:disabled):not(.disabled)
       cursor: pointer
+  &--success
+    border-radius: 10px
+    background-color: #27ae60
+    font: 700 17px/20px $main-font
+    color: #fff    
+    text-transform: uppercase
+    &:hover
+      background-color: #27ae60 * 1.1
+    &:active
+    &:focus
+
+
   &--primary-left,
   &--primary-right
     position: relative
@@ -885,11 +897,84 @@
     border-radius: 0 6px 6px 0
     color: #27ae60
     &:hover
-      color: #27ae60 * 1.2
+      color: #27ae60 * 1.15
     &:active
       box-shadow: 0 0 5px 1px #27ae60 * 1.2
     &:focus
-      color: #27ae60 * 1.4
+      color: #27ae60 * 1.25
     .btn__icon
       font-size: 14px
       color: #fff
+
++comment("section pl-info style")
+.pl-info
+  &__row
+    display: flex
+    flex-wrap: wrap
+    margin-right: -5px
+    margin-left: -5px
+  &__col
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 5px
+    padding-left: 5px
+    &--1
+      +col(auto)
+    &--2
+      +col
+  &__submit
+    width: 100%
+.pl-form
+  margin-bottom: 15px
+.pl-form-group
+  display: flex
+  flex-wrap: wrap
+  margin-bottom: 10px
+  &__control
+    +col
+    margin-right: 10px
+  &__btn-info
+    +col(auto)
+
+.pl-btn-toggle
+  $this: &
+  margin: 0
+  padding: 0
+  border: none
+  background-color: transparent
+  border-radius: 0
+  box-shadow: none
+  color: #c4c4c4
+  text-decoration: none
+  transition: all .3s ease-out
+  &:hover,
+  &:focus
+    text-decoration: none
+  &:not(:disabled):not(.disabled)
+    cursor: pointer
+  &__icon
+    &--1
+    &--2
+  &--active
+    #{$this}__icon--1
+      @extend .hidden-accessible
+  &:not(#{this}--active)
+    #{$this}__icon--2
+      @extend .hidden-accessible
+.pl-btn-info
+  margin: 0
+  padding: 0
+  border: none
+  background-color: transparent
+  border-radius: 0
+  box-shadow: none
+  color: #c4c4c4
+  text-decoration: none
+  transition: all .3s ease-out
+  &:hover,
+  &:focus
+    text-decoration: none
+  &:not(:disabled):not(.disabled)
+    cursor: pointer
+  &__icon
