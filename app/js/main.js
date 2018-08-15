@@ -44,23 +44,24 @@
 // ================================================================================== //
 
 
-const GRVE = GRVE || {};
+const SLID = SLID || {};
 
 
 (($ => {
   // # Document on Ready
   // ============================================================================= //
-  GRVE.documentReady = {
+  SLID.documentReady = {
     init() {
-      GRVE.outlineJS.init()
-      GRVE.pageSettings.init()
-      GRVE.basicElements.init()
+      SLID.outlineJS.init()
+      SLID.medicalProfile.init()
+      SLID.pageSettings.init()
+      SLID.basicElements.init()
     }
   }
 
   // # Document on Resize
   // ============================================================================= //
-  GRVE.documentResize = {
+  SLID.documentResize = {
     init() {
 
     }
@@ -68,7 +69,7 @@ const GRVE = GRVE || {};
 
   // # Document on Scroll
   // ============================================================================= //
-  GRVE.documentScroll = {
+  SLID.documentScroll = {
     init() {
 
     }
@@ -76,7 +77,7 @@ const GRVE = GRVE || {};
 
   // # Document on Load
   // ============================================================================= //
-  GRVE.documentLoad = {
+  SLID.documentLoad = {
     init() {
 
     }
@@ -84,7 +85,7 @@ const GRVE = GRVE || {};
 
   // # Remove outline on focus
   // ============================================================================= //
-  GRVE.outlineJS = {
+  SLID.outlineJS = {
     init() {
       const self =           this
 
@@ -119,7 +120,7 @@ const GRVE = GRVE || {};
 
   // # Check window size in range
   // ============================================================================= //
-  GRVE.isWindowSize = {
+  SLID.isWindowSize = {
     init(min = undefined, max = undefined) {
       let media
 
@@ -138,114 +139,160 @@ const GRVE = GRVE || {};
     }
   }
 
+  // # Page Medical Profile
+  // ============================================================================= //
+  SLID.medicalProfile = {
+    init() {
+      this.$tabsControl =                   $('[data-tabs-control-id]')
+      this.control =                  '.mp-list'
+      this.controlItem =              '.mp-list__item'
+      this.controlActiveClassName =   'mp-list__item--active'
+      this.tabItemActive =            'mp-content__item--active'
+      this.tabItem =                  '.mp-content__item'
+
+      this.tabs()
+      this.navigate()
+    },
+    tabs() {
+      this.$tabsControl.on('click', (e) => {
+        const $this =           $(e.currentTarget)
+        const target =          $this.data('tabs-control-id')
+        const $contentItem =    $(`[data-tabs-content-id="${target}"]`)
+
+        $this
+          .closest(this.controlItem)
+          .addClass(this.controlActiveClassName)
+          .siblings(this.controlItem)
+          .removeClass(this.controlActiveClassName)
+
+        $contentItem
+          .closest(this.tabItem)
+          .addClass(this.tabItemActive)
+          .siblings(this.tabItem)
+          .removeClass(this.tabItemActive)
+
+        this.changeProfileSelect(target)
+      })
+    },
+    navigate() {
+      const $navigate =           $("[data-tabs-navigation]")
+
+      $navigate.on("click", (e) => {
+        const $this =              $(e.currentTarget)
+        const navigateControlVal = $this.data("tabs-navigation")
+        const $activeControl =     this.$tabsControl.filter('.' + this.controlActiveClassName)
+
+        let indexActiveControl =   $activeControl.index()
+        let $featureControl
+        let featureControlTarget
+        let $featureContentItem
+
+        switch(navigateControlVal) {
+          case 'next':
+            indexActiveControl += 1
+            break;
+          case 'prev':
+            indexActiveControl -= 1
+            break;
+        }
+
+        // Index of feature tab shouldn't be bigger or less exited tabs
+
+        if (indexActiveControl < 0 || indexActiveControl > this.$tabsControl.length - 1) return 
+
+        $featureControl = this.$tabsControl.eq(indexActiveControl)
+
+        featureControlTarget = $featureControl.data('tabs-control-id')
+        $featureContentItem = $(`[data-tabs-content-id="${featureControlTarget}"]`)
+
+        $featureControl
+          .addClass(this.controlActiveClassName)
+          .siblings(this.controlItem)
+          .removeClass(this.controlActiveClassName)
+
+        $featureContentItem
+          .addClass(this.tabItemActive)
+          .siblings(this.tabItem)
+          .removeClass(this.tabItemActive)
+
+        this.changeProfileSelect(featureControlTarget)
+        e.preventDefault()
+      })
+    },
+    changeProfileSelect(target) {
+      const selectTarget = '#md-profile-select'
+      const $selectControl = $(selectTarget)
+      
+      // Select option
+      $(`${selectTarget} option`)
+        .filter(function() {
+          return $(this).data('tabs-id') == target
+        })
+        .prop('selected', true)
+      $selectControl.trigger('change')
+    },
+  }
+
   // # Page Settings
   // ============================================================================= //
-  GRVE.pageSettings = {
+  SLID.pageSettings = {
     init() {
       this.svgPolifill()
-      this.medicalProfile()
+      this.generateNewAlert()
     },
     svgPolifill() {
       svg4everybody()
     },
-    medicalProfile() {
-      const $items =              $('[data-tabs-control-id]')
-      const $navigate =           $("[data-tabs-navigation]")
-      const control =             '.mp-list'
-      const controlItemActive =   'mp-list__item--active'
-      const controlItem =         '.mp-list__item'
-      const tabItemActive =       'mp-content__item--active'
-      const tabItem =             '.mp-content__item'
+    generateNewAlert() {
+      const $btn =            $("[data-new-alert-control]")
+      const $control =        $btn.siblings(".ah-fieldset__control")
+      const $content =        $("[data-new-alert-content]")
+      const errorClassName =  'ah-fieldset__control--error'
 
-      $navigate.on("click", function(e) {
-        const $this =           $(this)
-        const value =           $this.data("tabs-navigation")
- 
-        const $activeControl =  $items.filter('.' + controlItemActive)
-        let indexControl =      $activeControl.index()
-        let $currentControl
-        let currentControlTarget
-        let $contentItem
+      $control.on("keyup", function(e) {
+        if (e.keyCode === 13) {
+          $btn.click()
+        }
+      })
 
-        switch(value) {
-          case 'next':
-            indexControl += 1
-            break;
-          case 'prev':
-            indexControl -= 1
-            break;
+      $btn.on('click', function(e) {
+        const $this =         $(this)
+        const controlValue =  $.trim($control.val())
+        const contentLength = $content.children().length
+        const nextContentID = contentLength + 1
+        let html = ''
+
+        if (controlValue == '') {
+          $control.addClass(errorClassName)
+          return false
         }
 
-        if (indexControl < 0 || indexControl > $items.length - 1) return 
+        $control.removeClass(errorClassName)
 
-        $currentControl = $items.eq(indexControl)
+        html += `<div class="ah-chkbox-btn ah-chkbox-group__item">`
+        html += `  <input id="ah-chkbox-1.${nextContentID}" type="checkbox" name="ah-chkbox">`
+        html += `  <label for="ah-chkbox-1.${nextContentID}">${controlValue}</label>`
+        html += `</div>`
 
-        currentControlTarget = $currentControl.data('tabs-control-id')
-        $contentItem = $(`[data-tabs-content-id="${currentControlTarget}"]`)
+        $content.append(html)
+        $control.val('')
 
-        console.log(currentControlTarget)
-
-        $currentControl
-          .addClass(controlItemActive)
-          .siblings(controlItem)
-          .removeClass(controlItemActive)
-
-        $contentItem
-          .eq(indexControl)
-          .addClass(tabItemActive)
-          .siblings(tabItem)
-          .removeClass(tabItemActive)
-
-        changeProfileSelect(currentControlTarget)
         e.preventDefault()
       })
-
-      $items.on('click', function() {
-        const $this = $(this)
-        const target = $this.data('tabs-control-id')
-        const $contentItem = $(`[data-tabs-content-id="${target}"]`)
-
-        $this
-          .closest(controlItem)
-          .addClass(controlItemActive)
-          .siblings(controlItem)
-          .removeClass(controlItemActive)
-
-        $contentItem
-          .closest(tabItem)
-          .addClass(tabItemActive)
-          .siblings(tabItem)
-          .removeClass(tabItemActive)
-
-        changeProfileSelect(target)
-      })
-
-      function changeProfileSelect(target) {
-        const selectTarget = '#md-profile-select'
-        const $selectControl = $(selectTarget)
-
-        // Select option
-        $(`${selectTarget} option`)
-          .filter(function() {
-            return $(this).data('tabs-content-id') == target
-          })
-          .prop('selected', true);
-        $selectControl.trigger('change')
-      }
-    }
+    },
   }
 
 
   // # Basic Elements
   // ============================================================================= //
-  GRVE.basicElements = {
+  SLID.basicElements = {
     init() {
     },
   }
 
 
-  $(document).ready(() => { GRVE.documentReady.init() })
-  $(window).smartresize(() => { GRVE.documentResize.init() })
-  $(window).on('load', () => { GRVE.documentLoad.init() })
-  $(window).on('scroll', () => { GRVE.documentScroll.init() })
+  $(document).ready(() => { SLID.documentReady.init() })
+  $(window).smartresize(() => { SLID.documentResize.init() })
+  $(window).on('load', () => { SLID.documentLoad.init() })
+  $(window).on('scroll', () => { SLID.documentScroll.init() })
 }))(jQuery)
