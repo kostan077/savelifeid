@@ -239,6 +239,7 @@ const SLID = SLID || {};
     init() {
       this.svgPolifill()
       this.generateNewAlert()
+      this.demographicToggle()
     },
     svgPolifill() {
       svg4everybody()
@@ -280,6 +281,14 @@ const SLID = SLID || {};
         e.preventDefault()
       })
     },
+    demographicToggle() {
+      const $btn =            $("[data-demographic-toggle]")
+      const activeClassName = "pl-btn-toggle--active"
+
+      $btn.on("click", function() {
+        $(this).toggleClass(activeClassName)
+      })
+    }
   }
 
 

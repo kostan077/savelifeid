@@ -45,15 +45,29 @@
     &:not(:disabled):not(.disabled)
       cursor: pointer
   &--success
-    border-radius: 10px
+    padding: 9px 14px
+    border-radius: 5px
+    border: 2px solid #27ae60
     background-color: #27ae60
-    font: 700 17px/20px $main-font
+    font: 700 12px/16px $main-font
     color: #fff    
     text-transform: uppercase
-    &:hover
-      background-color: #27ae60 * 1.1
-    &:active
+    text-decoration: none
+    transition: all .3s ease-out
+    &:hover,
     &:focus
+      text-decoration: none
+    &:hover
+      background-color: transparent
+      color: #27ae60
+    &:active
+      background-color: transparent
+      color: #27ae60 * 1.1
+      border-color: #27ae60 * 1.1
+    &:focus
+      background-color: #37b34a
+      color: #fff
+      border-color: #37b34a
 
 
   &--primary-left,
@@ -647,10 +661,15 @@
       height: auto
     &--extend
       max-width: 386px
+    &--lg
+      max-width: 3px
 .mp-card
   &__header
     max-width: 364px
     margin-left: auto
+  &__personal-info
+    position: relative
+    z-index: 2
 .mp-header
   position: relative
   padding-top: 45px
@@ -908,11 +927,16 @@
 
 +comment("section pl-info style")
 .pl-info
+  margin-bottom: 15px
   &__row
     display: flex
     flex-wrap: wrap
     margin-right: -5px
     margin-left: -5px
+    align-items: center
+    margin-bottom: 15px
+    &--mt
+      margin-top: 26px
   &__col
     position: relative
     width: 100%
@@ -921,22 +945,83 @@
     padding-left: 5px
     &--1
       +col(auto)
+    &--start
+      align-self: flex-start
     &--2
       +col
   &__submit
     width: 100%
-.pl-form
-  margin-bottom: 15px
+    margin-top: 11px
+  &__label
+    margin:
+      top: 4px
+      left: 10px
+      bottom: 7px
+.pl-label
+  font: 400 13px/16px $main-font
+  color: #4f4f4f
 .pl-form-group
+  $this: &
+  position: relative
   display: flex
   flex-wrap: wrap
-  margin-bottom: 10px
+  padding-right: 25px
+  &__btn-toggle
+    margin-right: 5px
   &__control
-    +col
-    margin-right: 10px
-  &__btn-info
-    +col(auto)
+    +col(24)
+    &--max-90
+      +col(90px)
+    &--40
+      +col
+      max-width: 40%
+    &--60
+      +col
+      max-width: 60%
 
+  &__btn-info
+    position: absolute
+    top: 50%
+    right: 0
+    transform: translateY(-50%)
+  & + #{$this}
+    margin-top: 15px
+.pl-group
+  position: relative
+  display: block
+  width: 100%
+  margin-bottom: 0
+  &__control
+  &:after
+    content: '\f073'
+    position: absolute
+    display: inline-block
+    top: 50%
+    right: 12px
+    transform: translateY(-50%)
+    font: normal normal normal 14px/1 FontAwesome
+    font-size: 16px
+    color: #363636
+    text-rendering: auto
+    -webkit-font-smoothing: antialiased
+    -moz-osx-font-smoothing: grayscale
+.pl-form-control
+  $this: &
+  display: block
+  width: 100%
+  padding: 9px 12px
+  color: #495057
+  background-color: #fff
+  background-clip: padding-box
+  border: 1px solid #bebebe
+  border-radius: 5px
+  font: 400 12px/14px $main-font
+  color: #000
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+  +placeholder
+    color: #4f4f4f
+  & + #{$this}
+    margin-left: 10px
 .pl-btn-toggle
   $this: &
   margin: 0
@@ -953,15 +1038,18 @@
     text-decoration: none
   &:not(:disabled):not(.disabled)
     cursor: pointer
+  &--active
+    color: #37b34a 
   &__icon
+    font-size: 26px
     &--1
     &--2
   &--active
     #{$this}__icon--1
-      @extend .hidden-accessible
-  &:not(#{this}--active)
+      display: none
+  &:not(#{$this}--active)
     #{$this}__icon--2
-      @extend .hidden-accessible
+      display: none
 .pl-btn-info
   margin: 0
   padding: 0
@@ -974,7 +1062,11 @@
   transition: all .3s ease-out
   &:hover,
   &:focus
+    color: #37b34a
     text-decoration: none
+  &:active
+    color: #37b34a * 1.1
   &:not(:disabled):not(.disabled)
     cursor: pointer
   &__icon
+    font-size: 19px
