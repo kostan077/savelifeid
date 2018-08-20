@@ -32,8 +32,8 @@
   &--default
   &--primary
   &--secondary
-  &--simple
 .btn
+  $this: &
   &--pure
     margin: 0
     padding: 0
@@ -94,8 +94,70 @@
       background-color: #979797 * 0.7
       color: #fff
       border-color: #979797 * 0.7
+  &--primary
+    padding: 9px 14px
+    border-radius: 5px
+    border: 2px solid #48b7e5
+    background-color: #48b7e5
+    font: 500 12px/16px $main-font
+    color: #fff    
+    text-transform: uppercase
+    text-decoration: none
+    transition: all .3s ease-out
+    &:hover,
+    &:focus
+      text-decoration: none
+    &:hover
+      background-color: transparent
+      color: #48b7e5
+      font-weight: 700
+    &:active
+      background-color: transparent
+      color: #48b7e5 * 1.1
+      border-color: #48b7e5 * 1.1
+      font-weight: 700
+    &:focus
+      background-color: #48b7e5 * 0.7
+      color: #fff
+      border-color: #48b7e5 * 0.7
+    #{$this}__icon
+      margin-right: 5px
 
+  &--simple
+    display: inline-flex
+    flex-wrap: wrap
+    align-items: center
+    padding: 0
+    border-radius: 0
+    border: 0
+    background-color: transparent
+    font: 400 14px/16px $main-font
+    color: #000
+    text-transform: uppercase
+    text-decoration: none
+    transition: all .3s ease-out
+    &:hover,
+    &:focus
+      text-decoration: underline
+    &:hover
+      color: #337ab7
+    &:focus
+      color: #3280a0
+    &:active
+      box-shadow: none
+      color: #4fc9fc
+  &--simple &
+    &__icon
+      flex: 0 0 auto
+      max-width: 100%
+      margin-right: 5px
+      &--red
+        color: #ff5a5a
+      &--gray
+        color: #818181
 
+  &--stretch
+    width: 100%
   &--primary-left,
   &--primary-right
     position: relative
@@ -1003,6 +1065,8 @@
       align-self: flex-start
     &--2
       +col
+  &__add
+    width: 100%
   &__cancel
     width: 100%
   &__submit
@@ -1138,12 +1202,21 @@
     cursor: pointer
   &__icon
     font-size: 19px
-.pl-panel
+.pl-board
   padding: 15px
   border-radius: 5px
-  background-color: #f4f4f4
+  //background-color: #f4f4f4
+  background-color: rgba(244, 244, 245, 0.55)
+.pl-panel
+  $this: &
+  &+&
+    #{$this}
+    border-top: #a7a7a7
   &__header
     margin-bottom: 15px
+  &__heading
+    margin:
+      top: 0
 .pl-heading
   font: 600 13px/15px $main-font
   color: #000
@@ -1155,3 +1228,19 @@
     display: table-row
   &__heading
     display: table-cell
+    padding-right: 10px
+.pl-toolbar
+  display: flex
+  flex-wrap: wrap
+  margin: 
+    left: -10px
+    right: -10px
+  padding: 0
+  list-style-type: none
+  &__item
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 10px
+    padding-left: 10px
+    +col(auto)
