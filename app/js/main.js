@@ -240,6 +240,7 @@ const SLID = SLID || {};
       this.svgPolifill()
       this.generateNewAlert()
       this.demographicToggle()
+      this.triggerFormControl()
     },
     svgPolifill() {
       svg4everybody()
@@ -288,6 +289,28 @@ const SLID = SLID || {};
       $btn.on("click", function() {
         $(this).toggleClass(activeClassName)
       })
+    },
+    triggerFormControl() {
+      const $btnControl =      $("[data-form-control]")
+      const toggleClassName =  'btn--secondary'
+      const $contents =        $("[data-form-toggle]")
+
+      $contents.hide()
+
+      $btnControl.on("click", function(e) {
+        const $this = $(this)
+        const toggleHtml =       $this.data("form-control-toggle")
+        const currentHtml =      $this.html()
+        const $toggleContent =   $this.closest("[data-form]").find("[data-form-toggle]")
+
+        $this.html(toggleHtml)
+        $this.data("form-control-toggle", currentHtml)
+        $this.toggleClass(toggleClassName)
+        $toggleContent.stop().slideToggle()
+
+        e.preventDefault()
+      })
+
     }
   }
 
