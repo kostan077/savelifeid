@@ -292,7 +292,7 @@ const SLID = SLID || {};
     },
     triggerFormControl() {
       const $btnControl =      $("[data-form-control]")
-      const toggleClassName =  'btn--secondary'
+      const toggleClassName =  'pl-info__add--decline'
       const $contents =        $("[data-form-toggle]")
 
       $contents.hide()

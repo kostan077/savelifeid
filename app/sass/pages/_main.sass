@@ -163,7 +163,7 @@
       &--gray
         color: #818181
 
-  &--stretch
+  &--fluid
     width: 100%
   &--primary-left,
   &--primary-right
@@ -350,16 +350,12 @@
     top: 30px
     bottom: 30px
   min-height: 97px
-  background-color: #4C5B84
-  background-repeat: no-repeat
-  background-position: 50% 50%
+  background: #4C5B84 no-repeat 50% 50%
   background-size: cover
   z-index: 1
   &:before
     +coverdiv
-    background-image: url(/img/intro-bg-2.svg)
-    background-repeat: no-repeat
-    background-position:  20px 16px
+    background: url(/img/intro-bg-2.svg) no-repeat 20px 16px
     background-size: contain
     z-index: -1
     +r($md)
@@ -768,6 +764,8 @@
     max-width: 364px
     margin-left: auto
   &__personal-info
+    max-width: 364px
+    margin-left: auto
     position: relative
     margin:
       top: 15px
@@ -1058,8 +1056,10 @@
     margin-left: -5px
     align-items: center
     margin-bottom: 15px
-    &--mt
+    &--mt-26
       margin-top: 26px
+    &--mt
+      margin-top: 15px
   &__col
     position: relative
     width: 100%
@@ -1073,11 +1073,27 @@
     &--2
       +col
   &__add
-    width: 100%
+    &--decline
+      border: 2px solid #979797
+      background-color: #979797
+      &:hover,
+      &:focus
+        text-decoration: none
+      &:hover
+        background-color: transparent
+        color: #979797
+        font-weight: 600
+      &:active
+        background-color: transparent
+        color: #979797 * 1.1
+        border-color: #27ae60 * 1.1
+        font-weight: 600
+      &:focus
+        background-color: #979797 * 0.7
+        color: #fff
+        border-color: #979797 * 0.7
   &__cancel
-    width: 100%
   &__submit
-    width: 100%
   &__label
     margin:
       top: 4px
@@ -1086,6 +1102,11 @@
   &__fieldset
     margin:
       bottom: 0
+.pl-legend
+  font: 600 13px/16px $main-font
+  color: #000
+  letter-spacing: 0.85px
+  text-transform: uppercase
 .pl-label
   font: 400 13px/16px $main-font
   color: #4f4f4f
@@ -1099,6 +1120,8 @@
     padding-right: 0
   &__btn-toggle
     margin-right: 5px
+  &__rdbox
+    width: 100%
   &__control
     +col(24)
     &--max-90
@@ -1240,6 +1263,10 @@
   font: 600 13px/15px $main-font
   color: #000
   letter-spacing: .85px
+.pl-sub-heading
+  font: 500 12px/14px $main-font
+  color: #000
+  letter-spacing: .85px
 .dl-list
   display: table
   list-style-type: none
@@ -1353,3 +1380,66 @@
           &:before
             content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBoZWlnaHQ9IjE1LjQwNSIgd2lkdGg9IjI0IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNC4wMDAyMTggMTUuNDA0ODE5Ij4KIDxnIGZpbGw9IiNmZjVhNWEiPgogIDxnIHRyYW5zZm9ybT0ibWF0cml4KC43MjI3OSAwIDAgLjcyMjc5IC0uMDAwMDA5Nzk2OCAtMS4xMDcyKSI+CiAgIDxwYXRoIGQ9Im0xMS45OCAxLjI1MmMtNi42MjI1IDAtMTEuOTggNi40ODYzLTExLjk4IDYuNDg2M3M0LjQwOTMgNi40ODYzIDExLjk4IDYuNDg2M2MwLjAzMzQzIDAgMC4wNjQzNS0wLjAwNTYgMC4wOTc2Ni0wLjAwNTl2LTIuNTE1NmMtMC4zMDQxNSAwLjAwOTQtMC42MDg2Mi0wLjAwNTctMC45MTAxNi0wLjA2NjQxLTAuNzg0LTAuMTU4LTEuNTAzNS0wLjU0OC0yLjA2ODQtMS4xMTktMC41NjQ4LTAuNTcyMi0wLjk0OTYtMS4zMDExLTEuMTA1NS0yLjA5NDItMC4xNTU4LTAuNzkzMS0wLjA3NTItMS42MTQyIDAuMjMwNS0yLjM2MTNzMC44MjIyLTEuMzg0NyAxLjQ4NjMtMS44MzRjMC42NjQxLTAuNDQ5MiAxLjQ0NTEtMC42ODk0IDIuMjQ0MS0wLjY4OTQgMC4wNDE2NCAwIDAuMDgxNTUgMC4wMTA0MjIgMC4xMjMwNSAwLjAxMTcxOXYtMi4yOTNjLTAuMDMyODktMC4wMDAzMTQ0LTAuMDY0Ny0wLjAwNTg2LTAuMDk3NjYtMC4wMDU4NnptMS43MzQ0IDAuMTU2MjV2Mi41NTY2YzAuMzk5NyAwLjE5NjkgMC43NzU0MSAwLjQ0NzI2IDEuMDk1NyAwLjc3MTQ4IDAuNzU3NDcgMC43NjY3NSAxLjE4MzYgMS44MDYzIDEuMTgzNiAyLjg5MDYgMCAwLjgwODY1LTAuMjM3NzggMS41OTkyLTAuNjgxNjQgMi4yNzE1LTAuMzk5MDggMC42MDQ2MS0wLjk1NDEzIDEuMDc5OS0xLjU5NzcgMS4zOTY1djIuNzk5YzYuNTA4LTAuODg3IDEwLjI4Ni02LjQ2MzEgMTAuMjg2LTYuNDYzMXMtNC40ODI1LTUuMjc5MS0xMC4yODUtNi4yMjI3em0wLjQ5MjE5IDEuNTA3OGM0LjQxMjQgMC44MTY1MiA3LjcxNDggMy44MjMyIDcuNzE0OCA0LjgyMjMgMCAwLjk5OTAzLTMuMzAyNCA0LjAwMzgtNy43MTQ4IDQuODIwMyAwLjkwODI1LTAuNDI2NTEgMS42NzgtMS4xMDY3IDIuMjE2OC0xLjk2MDkgMC41Mzg3Ni0wLjg1NDI1IDAuODI0MjItMS44NDU5IDAuODI0MjItMi44NTk0cy0wLjI4NTQ2LTIuMDA3MS0wLjgyNDIyLTIuODYxM2MtMC41MzgtMC44NTQzLTEuMzA4LTEuNTM0NS0yLjIxNi0xLjk2MXptLTQuNDQwNCAwLjAxMTdjLTAuOTAyIDAuNDI5NC0xLjY2NSAxLjEwOTEtMi4xOTkyIDEuOTYxLTAuNTM0MiAwLjg1MTgtMC44MTg0IDEuODQwNi0wLjgxODQgMi44NDk2czAuMjg0MTQgMS45OTU4IDAuODE4MzYgMi44NDc3YzAuNTM0MjEgMC44NTE4NyAxLjI5NzIgMS41MzM1IDIuMTk5MiAxLjk2MjktNC40MDA2LTAuODQ0OTMtNy42OTE0LTMuOTE3OS03LjY5MTQtNC44MTA1IDAtMC44OTM1IDMuMjkwNC0zLjk2NTYgNy42OTE0LTQuODEwNXoiIHRyYW5zZm9ybT0ibWF0cml4KDEuMzgzNSAwIDAgMS4zODM1IC4wMDAwMTM1NTQgMS41MzE2KSIgc3Ryb2tlLXdpZHRoPSIuNzIyNzgiIGZpbGw9IiNmZjVhNWEiLz4KICA8L2c+CiAgPHBhdGggZD0ibTExLjQ3OC0wLjA3ODA0NXYxNS40ODMiIHN0cm9rZT0iI2ZmNWE1YSIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KIDwvZz4KPC9zdmc+Cg==')
 
+.pl-rdbox-group
+  display: flex
+  flex-wrap: wrap
+  margin:
+    left: -10px
+    right: -10px
+  align-items: center
+  &__item
+    +col(auto)
+    padding:
+      left: 10px
+      right: 10px
+.pl-rdbox-btn
+  $this: &
+  padding: 0
+  color: #4d4d4d
+  &--uppercase
+    input[type="radio"]
+      &+ label
+        text-transform: uppercase
+  input[type="radio"]
+    display: block
+    float: none
+    @extend .hidden-accessible
+    &+ label
+      width: auto
+      height: auto
+      padding:
+        left: 30px
+      border-radius: 0
+      overflow: visible
+      margin: 0
+      border: none
+      cursor: pointer
+      font: 400 13px/16px $main-font
+      color: #000
+      &:before
+        content: '\f111'
+        position: absolute
+        display: flex
+        justify-content: center
+        align-items: center
+        margin: 0
+        left: 0
+        top: 50%
+        width: 1.692em
+        height: 1.692em
+        transform: translateY(-50%)
+        border: 1px solid #989898
+        border-radius: 50%
+        font: normal normal normal 14px/1 FontAwesome
+        font-size: 14px
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+        color: transparent
+        transition: all .3s linear
+      &:after
+        content: none
+  input[type="radio"]:checked 
+    &+ label
+      &:before
+        color: #498fb3
