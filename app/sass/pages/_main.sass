@@ -763,13 +763,16 @@
   &__header
     max-width: 364px
     margin-left: auto
+    margin-bottom: 15px
   &__personal-info
     max-width: 364px
     margin-left: auto
     position: relative
-    margin:
-      top: 15px
     z-index: 2
+  &__group
+    &--fixed
+      max-width: 364px
+      margin-left: auto
 .mp-header
   position: relative
   padding-top: 45px
@@ -1103,6 +1106,9 @@
     margin:
       bottom: 0
 .pl-legend
+  margin-bottom: 12px
+  padding: 0
+  border: none
   font: 600 13px/16px $main-font
   color: #000
   letter-spacing: 0.85px
@@ -1126,9 +1132,18 @@
     +col(24)
     &--max-90
       +col(90px)
+    &--20
+      +col
+      max-width: 20%
+    &--30
+      +col
+      max-width: 30%
     &--40
       +col
       max-width: 40%
+    &--50
+      +col
+      max-width: 50%
     &--60
       +col
       max-width: 60%
@@ -1178,6 +1193,22 @@
   &--textarea
     min-height: 90px
     resize: none
+  @at-root
+    select
+      &#{$this}
+        appearance: none
+        padding:
+          right: 22px
+        background: #fff
+        background-image: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTMiIGhlaWdodD0iMTEiIHZpZXdCb3g9IjAgMCAxMyAxMSIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNNi41IDExTDAuODcwODM0IDAuNUwxMi4xMjkyIDAuNUw2LjUgMTFaIiBmaWxsPSIjMDAwMDAwIi8+PC9zdmc+')
+        background-position: calc(100% - 6px) 50%
+        background-repeat: no-repeat
+        background-size: 10px
+        cursor: pointer
+        &::-ms-expand
+          display: none
+        option[hidden]
+          display: none
 .pl-btn-toggle
   $this: &
   padding: 4px
@@ -1259,6 +1290,8 @@
     margin:
       top: 0
       bottom: 3px
+  &__list
+    margin-bottom: 0
 .pl-heading
   font: 600 13px/15px $main-font
   color: #000
@@ -1273,7 +1306,7 @@
   padding-left: 16px
   &__item
     display: table-row
-    font-size: 13px
+    font-size: 12px
     line-height: 19px
     font-family: $main-font
     letter-spacing: .85px
@@ -1281,6 +1314,7 @@
   &__heading
     display: table-cell
     padding-right: 10px
+    font-weight: 600
 .pl-toolbar
   $this: &
   display: flex
@@ -1443,3 +1477,56 @@
     &+ label
       &:before
         color: #498fb3
+.pl-list
+  $this: &
+  margin: 0
+  padding: 0 15px
+  border-radius: 5px
+  background-color: rgba(244, 244, 245, 0.55)
+  counter-reset: list
+  &--min-h
+    min-height: 500px
+  &__item
+    display: flex
+    flex-wrap: wrap
+    align-items: flex-start
+    padding:
+      top: 15px
+      bottom: 5px
+    &+ #{$this}__item
+      border-top: 1px solid #a8a8a8
+    &:before
+      content: counter(list) ". "
+      counter-increment: list
+      margin-right: 5px
+      +col(auto)
+      font: 600 14px/22px $main-font
+      color: #000
+      letter-spacing: 1.25px
+  &__card
+    +col
+.pl-card
+  &__header
+    display: flex
+    flex-wrap: wrap
+    margin:
+      left: -10px
+      right: -10px
+      bottom: 10px
+  &__body
+    margin-bottom: 10px
+  &__descr
+    margin-bottom: 3px
+  &__heading
+    +col
+    margin: 0
+    padding:
+      left: 10px
+      right: 10px
+    font-size: 14px
+  &__edit
+    +col(auto)
+    margin-left: auto
+    padding:
+      left: 10px
+      right: 10px

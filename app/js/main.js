@@ -241,6 +241,7 @@ const SLID = SLID || {};
       this.generateNewAlert()
       this.demographicToggle()
       this.triggerFormControl()
+      this.toggleContent()
     },
     svgPolifill() {
       svg4everybody()
@@ -311,6 +312,25 @@ const SLID = SLID || {};
         e.preventDefault()
       })
 
+    },
+    toggleContent() {
+      const $control =  $("[data-card-toggle-control]")
+      const $contents = $("[data-card-toggle-content]")
+
+      $contents.hide()
+
+      $control.on("click", function(e) {
+        e.preventDefault()
+        const $this =           $(this)
+        const $card =           $this.closest("[data-card-toggle]")
+        const $currentContent = $card.find("[data-card-toggle-content]")
+
+        if ( $currentContent.is(":visible") ) return false
+
+        $contents.filter(":visible").not($currentContent).slideUp()
+        $currentContent.stop().slideDown()
+
+      })
     }
   }
 
