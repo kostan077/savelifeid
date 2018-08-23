@@ -54,6 +54,7 @@ const SLID = SLID || {};
     init() {
       SLID.outlineJS.init()
       SLID.medicalProfile.init()
+      SLID.tabs.init()
       SLID.pageSettings.init()
       SLID.basicElements.init()
     }
@@ -137,6 +138,67 @@ const SLID = SLID || {};
       return media.matches
 
     }
+  }
+
+  // # Tabs
+  // ============================================================================= //
+  SLID.tabs = {
+    init() {
+      this.$control =           $('[data-tabs]')
+      this.control =            '.mp-tabs-control'
+      this.controlItemActive =  'mp-tabs-control__item--active'
+      this.controlItem =        '.mp-tabs-control__item'
+      this.tabItemActive =      'mp-tabs__item--active'
+      this.tabItem =            '.mp-tabs__item'
+
+      this.click()
+      this.hash()
+    },
+    click() {
+
+      this.$control.on('click', (e) => {
+        const $this =             $(e.currentTarget)
+        const isPrevented =       $this.is("[data-tabs-not-prevent]")
+        const target =            $this.is('[href*="#"]:not([href="#"])') ? $this.attr("href") : $this.data("tabs-target")
+        const $contentItem =      $(target)
+
+        if ($this.prop("disabled")) return
+
+        $this
+          .closest(this.controlItem)
+          .toggleClass(this.controlItemActive)
+          .siblings(this.controlItem)
+          .removeClass(this.controlItemActive)
+          .find("[data-tabs-not-prevent]").prop("checked", false)
+
+        $contentItem
+          .closest(this.tabItem)
+          .toggleClass(this.tabItemActive)
+          .siblings(this.tabItem)
+          .removeClass(this.tabItemActive)
+
+        // reset compare items
+        $this.is("[data-compare-reset-control") &&
+          $("[data-compare-reset]").prop("checked", false)
+
+        !isPrevented && e.preventDefault()
+      })
+    },
+    hash() {
+      const hash =           location.hash
+
+      this.$control.each(function(id, el){
+        const $this =      $(el)
+        const tabHash =    $this.data('tabs-target')
+
+        if(hash == tabHash) {
+          $this.click()
+          $('html, body').animate({
+            scrollTop: $this.offset().top - 15
+          }, 667)
+        }
+      })
+    },
   }
 
   // # Page Medical Profile
