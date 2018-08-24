@@ -393,7 +393,7 @@ const SLID = SLID || {};
         $currentContent.stop().slideDown()
 
       })
-    }
+    },
   }
 
 
