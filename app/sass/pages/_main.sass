@@ -94,6 +94,14 @@
       border-color: #48b7e5 * 0.7
     #{$this}__icon
       margin-right: 5px
+    .text-primary
+      flex: 0 0 auto
+      max-width: 100%
+      margin-right: 5px
+      font-size: 16px
+      color: inherit
+      &~ #{$this}__icon
+        @extend .hidden-accessible
   &--secondary
     padding: 9px 14px
     border-radius: 5px
@@ -120,6 +128,31 @@
       background-color: #979797 * 0.7
       color: #fff
       border-color: #979797 * 0.7
+  &--submit
+    padding: 4px 14px
+    border-radius: 5px
+    border: 2px solid #2f80ed
+    background-color: #2f80ed
+    font: 700 12px/16px $main-font
+    color: #fff    
+    text-decoration: none
+    transition: all .3s ease-out
+    &:hover,
+    &:focus
+      text-decoration: none
+    &:hover
+      background-color: #2f80ed * 1.2
+      border-color: #2f80ed * 1.2
+      color: #fff
+    &:active
+      background-color: transparent
+      color: #2f80ed * 1.1
+      border-color: #2f80ed * 1.1
+      font-weight: 600
+    &:focus
+      background-color: #2f80ed * 0.7
+      color: #fff
+      border-color: #2f80ed * 0.7
 
   &--simple
     display: inline-flex
@@ -1625,9 +1658,12 @@
     +col(24)
     margin:
       bottom: 15px
-    padding: 10px
+    padding: 15px
     border-radius: 5px
     background-color: rgba(244, 244, 245, 0.55)
+  &__inner
+    padding:
+      left: 15px
   &__btn
     +col(auto)
     margin: 
@@ -1776,3 +1812,272 @@
     height: 321px
     object-fit: cover
     font-family: 'object-fit: cover;'
+
++comment("section bl-billing style")
+
++comment("section bl-subscribe style")
+.bl-subscribe
+  margin-bottom: 45px
+
+.dt-danger-text
+  font: 400 13px/15px $main-font
+  font-style: italic
+  color: #ff5a5a
+  letter-spacing: .8px
+
+.bl-heading
+  margin-top: 0
+  margin-bottom: 15px
+  font: 400 14px/22px $main-font
+  color: #000
+  letter-spacing: 1.25px
+
++comment("home page style")
+
+.hp-welcome,
+.hp-how,
+.hp-manual,
+.hp-protect
+  background-repeat: no-repeat
+  background-position: 50% 50%
+  background-size: auto 100%
+  min-height: 477px
+  +r(992)
+    background-size: auto
+  &__container
+    margin:
+      left: auto
+      right: auto
+    max-width: 885px
+    padding:
+      left: 15px
+      right: 15px
+  &__row
+    display: flex
+    flex-wrap: wrap
+  &__col
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 15px
+    padding-left: 15px
+    +col(12)
+  &__heading
+    text-align: center
+
++comment("hp-welcome section style")
+.hp-heading
+  margin:
+    top: 0
+  font: 300 39px/59px $main-font
+  color: #f2f2f2
+  letter-spacing: 1.5px
+  &__sub-text
+    display: block
+    margin:
+      top: 7px
+    font-size: 27px
+    line-height: 34px
+.hp-legend
+  font: 400 32px/1 $main-font
+  color: #2f80ed
+.hp-form-link
+  font: 400 12px/14px $main-font
+  color: #7e7e7e
+  transition: all .3s ease-out
+  &:hover
+    color: #23527c
+    text-decoration: underline
+  &:active
+    color: #23527c * 1.2
+  &:focus
+    color: #23527c * 0.8
+
+.hp-form
+  padding: 12px 16px
+  box-shadow: 0 0 20px rgba(0, 0, 0, .4)
+  border-radius: 10px
+  background-color: #fffefe
+  &--fixed
+    margin:
+      left: auto
+      right: auto
+    max-width: 286px
+  &__legend
+    margin-bottom: 10px
+    border: none
+    text-align: center
+  &__fieldset
+  &__text
+    margin: 0
+    line-height: 15px
+    text-align: right
+  &__submit
+    margin:
+      top: 10px
+      bottom: 3px
+    width: 100%
+
+.hp-form-group
+  position: relative
+  margin-bottom: 3px
+.hp-form-control
+  $this: &
+  display: block
+  width: 100%
+  padding: 9px
+  background-color: #fff
+  background-clip: padding-box
+  border: none
+  border-bottom: 1px solid #7e7e7e
+  border-radius: 0
+  font: 400 12px/14px $main-font
+  color: #000
+  transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out
+  +placeholder
+    color: #7e7e7e
+  &[type=password]
+    font: small-caption
+    font-size: 12px
+    letter-spacing: 2px
+    +placeholder
+      font: 400 12px/14px $main-font
+      color: #7e7e7e
+      letter-spacing: normal
+.hp-welcome
+  padding: 51px 0 17px
+  //background-color: #7d92a4
+  background-position: 50% 0
+  &__col
+    margin-left: auto
+  &__form
+    margin-bottom: 19px
+  &__heading
+
+    color: #fff
+
++comment("hp-how section style")
+.hp-how
+  padding: 20px 0
+  //background-color: #c3babb
+  background-position: calc(50% + 35px) 50%
+  &__col
+    +col(36%)
+
++comment("hp-manual section style")
+.hp-manual
+  padding: 65px 0
+  //background-color: #fff
+  background-position: calc(50% + 351px) 0
+  &__container
+    max-width: 763px
+  &__header
+    text-align: right
+  &__heading
+    display: inline-block
+    vertical-align: top
+    margin-bottom: 28px
+  &__content
+    padding:
+      left: 14px
+      right: 14px
+
++comment("hp-notification section style")
+.hp-notification
+  padding: 40px 0
+  &__container
+    margin:
+      left: auto
+      right: auto
+    max-width: 885px
+    padding:
+      left: 15px
+      right: 15px
+  &__row
+    display: flex
+    flex-wrap: wrap
+    justify-content: center
+  &__col
+    position: relative
+    width: 100%
+    min-height: 1px
+    padding-right: 15px
+    padding-left: 15px
+    +col(6)
+.hp-sub-heading
+  margin:
+    top: 0
+    bottom: 21px
+  font: 300 36px/48px $main-font
+  color: #333279
+  letter-spacing: 2.1px
+  &--bordered
+    padding: 20px 0 22px
+    border:
+      top: 1px solid #7e7e7e
+      bottom: 1px solid #7e7e7e
+.hp-text
+  font: 400 13px/18px $main-font
+  color: #000
+  &--bold
+    font-weight: 600
+.hp-list
+  padding-left: 0
+  list-style-type: none
+  &__item
+    font: 400 13px/18px $main-font
+    color: #000
+    &:before
+      content: '• '
+.hp-card
+  display: flex
+  flex-direction: column
+  text-align: center
+  color: #000
+  @extend %link
+  &:hover,
+  &:focus
+    color: #337ab7
+  &__figure
+    min-height: 95px
+  &__img
+    font-size: 94px
+    color: inherit
+    &--3
+      font-size: 82px
+  &__text
+    font: 600 13px/17px $main-font
+    color: inherit
+
++comment("hp-protect section style")
+.hp-protect
+  padding: 36px 0
+  //background-color: #c3babb
+  background-position: calc(50% + 35px) 50%
+  min-height: 525px
+  &__container
+  &__col
+    +col(36%)
+
++comment("footer section style")
+.ft-footer
+  padding: 16px 0
+  background-color: #2d9cdb
+  text-align: center
+  &__logo
+    margin-bottom: 10px
+  &__text
+    margin: 0
+.ft-link
+  color: #fff
+  transition: all .3s ease-out
+  &:hover,
+  &:focus
+    color: #fff
+    text-decoration: underline
+
+.ft-footer__text
+  color: #fff
+.ft-text
+  font: 300 14px/23px $main-font
+  color: #fff
