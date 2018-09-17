@@ -98,6 +98,13 @@
       margin-right: 5px
     .glyphicon-remove
       color: #fff
+      font-size: 13px
+    .glyphicon-plus
+      color: #fff
+      font-size: 13px
+      top: 1px
+    .glyphicon
+      top: 2px
     .text-primary
       flex: 0 0 auto
       max-width: 100%
@@ -369,7 +376,19 @@
         text-decoration: underline
 .sn-profile
   &__dropdown
-    padding: 10px
+    white-space: nowrap
+    &>li
+      &>a
+        border: 2px solid transparent
+        &:hover
+          border-color: #48b7e5
+          background-color: #48b7e5
+          color: #fff
+        &:focus
+          background-color: transparent
+          color: #48b7e5
+          border-color: #48b7e5
+
 .pl-figure
   border-radius: 50%
   overflow: hidden
@@ -932,32 +951,29 @@
       font: 400 13px/16px $main-font
       color: #000
       &:before
-        content: '\f111'
+        content: "" 
         position: absolute
-        display: flex
-        justify-content: center
-        align-items: center
+        display: block
         margin: 0
         left: 0
         top: 50%
-        width: 1.692em
-        height: 1.692em
+        width: 24px
+        height: 24px
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjguMzEwMW1tIiB3aWR0aD0iOC4zMTAxbW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDguMzEwMDcyOCA4LjMxMDA3MjgiPgogPGRlZnM+CiAgPGZpbHRlciBpZD0iZmlsdGVyMF9kIiBzdHlsZT0iY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzOnNSR0IiIGhlaWdodD0iMzkiIHdpZHRoPSIzOSIgeT0iMCIgeD0iMCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KICAgPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxMjcgMCIgdHlwZT0ibWF0cml4IiBpbj0iU291cmNlQWxwaGEiLz4KICAgPGZlT2Zmc2V0IGR5PSI0Ii8+CiAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIiLz4KICAgPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwLjI1IDAiIHR5cGU9Im1hdHJpeCIvPgogICA8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvdyIvPgogICA8ZmVCbGVuZCByZXN1bHQ9InNoYXBlIiBtb2RlPSJub3JtYWwiIGluMj0iZWZmZWN0MV9kcm9wU2hhZG93IiBpbj0iU291cmNlR3JhcGhpYyIvPgogIDwvZmlsdGVyPgogIDxmaWx0ZXIgaWQ9ImZpbHRlcjFfZCIgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczpzUkdCIiBoZWlnaHQ9IjI1IiB3aWR0aD0iMjUiIHk9IjciIHg9IjciIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CiAgIDxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiIHR5cGU9Im1hdHJpeCIgaW49IlNvdXJjZUFscGhhIi8+CiAgIDxmZU9mZnNldCBkeT0iNCIvPgogICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyIi8+CiAgIDxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMC4yNSAwIiB0eXBlPSJtYXRyaXgiLz4KICAgPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJlZmZlY3QxX2Ryb3BTaGFkb3ciLz4KICAgPGZlQmxlbmQgcmVzdWx0PSJzaGFwZSIgbW9kZT0ibm9ybWFsIiBpbjI9ImVmZmVjdDFfZHJvcFNoYWRvdyIgaW49IlNvdXJjZUdyYXBoaWMiLz4KICA8L2ZpbHRlcj4KIDwvZGVmcz4KIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNjguMiAtMTMyLjI4KSI+CiAgPGNpcmNsZSBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0icGFpbnQtb3JkZXI6bWFya2VycyBzdHJva2UgZmlsbCIgc3Ryb2tlLXdpZHRoPSIuMzk2ODciIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHN0cm9rZT0iIzk5OSIgY3k9IjEzNi40NCIgY3g9IjE3Mi4zNiIgcj0iMy45NTY2IiBmaWxsPSJub25lIi8+CiA8L2c+Cjwvc3ZnPgo=')
+        background-repeat: no-repeat
+        background-position: 50% 50%
+        background-size: contain
         transform: translateY(-50%)
-        border: 1px solid #989898
-        border-radius: 50%
-        font: normal normal normal 14px/1 FontAwesome
-        font-size: 14px
-        text-rendering: auto
-        -webkit-font-smoothing: antialiased
-        -moz-osx-font-smoothing: grayscale
+        border: none
+        border-radius: 50% 
         color: transparent
-        transition: all .3s linear
+        transition: none
       &:after
         content: none
   input[type="radio"]:checked 
     &+ label
       &:before
-        color: #498fb3
+        background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBoZWlnaHQ9IjguMzEwMW1tIiB3aWR0aD0iOC4zMTAxbW0iIHZlcnNpb249IjEuMSIgdmlld0JveD0iMCAwIDguMzEwMDcyOCA4LjMxMDA3MjgiPgogPGRlZnM+CiAgPGZpbHRlciBpZD0iZmlsdGVyMF9kIiBzdHlsZT0iY29sb3ItaW50ZXJwb2xhdGlvbi1maWx0ZXJzOnNSR0IiIGhlaWdodD0iMzkiIHdpZHRoPSIzOSIgeT0iMCIgeD0iMCIgZmlsdGVyVW5pdHM9InVzZXJTcGFjZU9uVXNlIj4KICAgPGZlRmxvb2QgZmxvb2Qtb3BhY2l0eT0iMCIgcmVzdWx0PSJCYWNrZ3JvdW5kSW1hZ2VGaXgiLz4KICAgPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAxMjcgMCIgdHlwZT0ibWF0cml4IiBpbj0iU291cmNlQWxwaGEiLz4KICAgPGZlT2Zmc2V0IGR5PSI0Ii8+CiAgIDxmZUdhdXNzaWFuQmx1ciBzdGREZXZpYXRpb249IjIiLz4KICAgPGZlQ29sb3JNYXRyaXggdmFsdWVzPSIwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwLjI1IDAiIHR5cGU9Im1hdHJpeCIvPgogICA8ZmVCbGVuZCBtb2RlPSJub3JtYWwiIGluMj0iQmFja2dyb3VuZEltYWdlRml4IiByZXN1bHQ9ImVmZmVjdDFfZHJvcFNoYWRvdyIvPgogICA8ZmVCbGVuZCByZXN1bHQ9InNoYXBlIiBtb2RlPSJub3JtYWwiIGluMj0iZWZmZWN0MV9kcm9wU2hhZG93IiBpbj0iU291cmNlR3JhcGhpYyIvPgogIDwvZmlsdGVyPgogIDxmaWx0ZXIgaWQ9ImZpbHRlcjFfZCIgc3R5bGU9ImNvbG9yLWludGVycG9sYXRpb24tZmlsdGVyczpzUkdCIiBoZWlnaHQ9IjI1IiB3aWR0aD0iMjUiIHk9IjciIHg9IjciIGZpbHRlclVuaXRzPSJ1c2VyU3BhY2VPblVzZSI+CiAgIDxmZUZsb29kIGZsb29kLW9wYWNpdHk9IjAiIHJlc3VsdD0iQmFja2dyb3VuZEltYWdlRml4Ii8+CiAgIDxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMTI3IDAiIHR5cGU9Im1hdHJpeCIgaW49IlNvdXJjZUFscGhhIi8+CiAgIDxmZU9mZnNldCBkeT0iNCIvPgogICA8ZmVHYXVzc2lhbkJsdXIgc3RkRGV2aWF0aW9uPSIyIi8+CiAgIDxmZUNvbG9yTWF0cml4IHZhbHVlcz0iMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMCAwIDAgMC4yNSAwIiB0eXBlPSJtYXRyaXgiLz4KICAgPGZlQmxlbmQgbW9kZT0ibm9ybWFsIiBpbjI9IkJhY2tncm91bmRJbWFnZUZpeCIgcmVzdWx0PSJlZmZlY3QxX2Ryb3BTaGFkb3ciLz4KICAgPGZlQmxlbmQgcmVzdWx0PSJzaGFwZSIgbW9kZT0ibm9ybWFsIiBpbjI9ImVmZmVjdDFfZHJvcFNoYWRvdyIgaW49IlNvdXJjZUdyYXBoaWMiLz4KICA8L2ZpbHRlcj4KIDwvZGVmcz4KIDxnIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0xNjguMiAtMTMyLjI4KSI+CiAgPGNpcmNsZSBzdHlsZT0icGFpbnQtb3JkZXI6bWFya2VycyBzdHJva2UgZmlsbCIgY3k9IjEzNi40MyIgY3g9IjE3Mi4zNSIgcj0iMi4yMzgzIiBmaWxsPSIjM2Q5MWI1Ii8+CiAgPGNpcmNsZSBzdHJva2UtbGluZWpvaW49InJvdW5kIiBzdHlsZT0icGFpbnQtb3JkZXI6bWFya2VycyBzdHJva2UgZmlsbCIgc3Ryb2tlLXdpZHRoPSIuMzk2ODciIHN0cm9rZS1saW5lY2FwPSJzcXVhcmUiIHN0cm9rZT0iIzk5OSIgY3k9IjEzNi40NCIgY3g9IjE3Mi4zNiIgcj0iMy45NTY2IiBmaWxsPSJub25lIi8+CiA8L2c+Cjwvc3ZnPgo=')
   &--reverse
     input[type="radio"]
       &+ label
@@ -1119,6 +1135,7 @@
     border: 1px solid currentColor
     border-radius: 0 6px 6px 0
     color: #27ae60
+    z-index: 3
     &:hover
       color: #27ae60 * 1.15
     &:active
@@ -1249,10 +1266,8 @@
     margin-top: 15px
   &__label
     position: absolute
-    top: 50%
     margin: 0
-    padding: 33px 0 0 0
-    transform: translateY(-50%)
+    top: 9.305px
     right: 5px
     cursor: pointer
     z-index: 2
@@ -1264,6 +1279,8 @@
     .pl-form-label
       &:after
         content: none
+/*.ct-personal .ct-password .pl-form-group__label
+  top: auto !important */
 .pl-chkbox
   &__info 
     .pl-btn-info 
@@ -1443,6 +1460,7 @@
   font: 600 13px/15px $main-font
   color: #000
   letter-spacing: .85px
+  word-break: break-all
 .pl-sub-heading
   margin-top: 0
   font: 500 12px/14px $main-font
@@ -1542,8 +1560,8 @@
     &:checked 
       &+ label
         color: #000
-        &:hover
-          color: #337ab7
+        //&:hover
+        //  color: #337ab7
         &:focus
           color: #3280a0
         &:active
@@ -1554,8 +1572,8 @@
       &+ label
         &+ label
           color: #000
-          &:hover
-            color: #337ab7
+          //&:hover
+          //  color: #337ab7
           &:focus
             color: #3280a0
           &:active
@@ -1848,7 +1866,8 @@
 +comment("section bl-billing style")
 
 +comment("section bl-subscribe style")
-.bl-subscribe
+.bl-subscribe,
+.pinfo-section
   margin-bottom: 45px
 
 .dt-danger-text
@@ -1857,12 +1876,22 @@
   color: #ff5a5a
   letter-spacing: .8px
 
-.bl-heading
+.bl-heading,
+.pinfo-heading
   margin-top: 0
   margin-bottom: 15px
   font: 400 25px/1 $main-font
   color: #000
   letter-spacing: 1.25px
+
+.pinfo-section .mp-text
+  color: #000
+
+.pinfo-section 
+  p, 
+  div, 
+  a:not(.glyphicon)
+    font-family: $main-font
 
 +comment("home page style")
 
@@ -2093,6 +2122,7 @@
 
 +comment("footer section style")
 .ft-footer
+  margin-top: 26px
   padding: 16px 0
   background-color: #2d9cdb
   text-align: center
@@ -2115,13 +2145,10 @@
   color: #fff
 
 +comment("general styles")
-.panel.panel-default.panel-medical-block
-  .intl-tel-input.allow-dropdown + .pl-form-group__btn-info.button-hint.form-tooltip-icon,
-  #add-hospital_phone + .pl-form-group__btn-info.button-hint.form-tooltip-icon,
-  #edit-hospital_phone + .pl-form-group__btn-info.button-hint.form-tooltip-icon,
-  #add-phone + .pl-form-group__btn-info.button-hint.form-tooltip-icon,
-  #edit-phone + .pl-form-group__btn-info.button-hint.form-tooltip-icon
-    bottom: 25px
+/*.panel.panel-default.panel-medical-block
+  .intl-tel-input.allow-dropdown + .pl-form-group__btn-info.button-hint.form-tooltip-icon, .pl-form-group__btn-info.button-hint.form-tooltip-icon
+    bottom: 25px */
+
 .ml-auto
     margin-left: auto
 .form-group.no-bottom-margin 
@@ -2145,7 +2172,8 @@
     &.field-add-notify_sms, &.field-add-notify_email
       padding-right: 0
   .pl-rdbox-group__item
-    #add-notify_sms, #add-notify_email
+    #add-notify_sms, 
+    #add-notify_email
       display: flex
       flex-wrap: wrap
       align-items: center
