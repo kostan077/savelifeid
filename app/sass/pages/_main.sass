@@ -54,9 +54,15 @@
     text-transform: uppercase
     text-decoration: none
     transition: all .3s ease-out
+    .text-primary
+      color: inherit
     &:hover,
     &:focus
       text-decoration: none
+    &:focus
+      background-color: #37b34a
+      color: #fff
+      border-color: #37b34a
     &:hover
       background-color: transparent
       color: #27ae60
@@ -64,10 +70,6 @@
       background-color: transparent
       color: #27ae60 * 1.1
       border-color: #27ae60 * 1.1
-    &:focus
-      background-color: #37b34a
-      color: #fff
-      border-color: #37b34a
   &--primary
     padding: 9px 14px
     border-radius: 5px
@@ -416,19 +418,29 @@
 
 +comment("section in-intro style")
 .in-heading
-  font: 400 37px/47px $main-font
+  font: 400 15px/19px $main-font
   color: #f2f2f2
-  letter-spacing: 6px
+  letter-spacing: 2px
+  +r($sm)
+    font-size: 37px
+    font-weight: 400
+    letter-spacing: 6px
+    line-height: 47px
 .in-intro
   position: relative
-  margin-bottom: 24px
   padding:
-    top: 30px
-    bottom: 30px
-  min-height: 97px
+    top: 10px
+    bottom: 10px
+  min-height: 46px
   background: #4C5B84 no-repeat 50% 50%
   background-size: cover
   z-index: 1
+  +r($md)
+    margin-bottom: 24px
+    padding:
+      top: 30px
+      bottom: 30px
+    min-height: 
   &:before
     +coverdiv
     background: url("/img/intro-bg-2.svg") no-repeat 20px 16px
@@ -663,9 +675,13 @@
 .footer
   &__container
     border: none
-  &__nav    
+  &__nav
+    display: flex
+    flex-direction: column
     border-top: 1px solid #bdbdbd
+    justify-content: center
     +r($md)
+      flex-direction: row
       display: inline-block
       vertical-align: top
 .ft-nav
@@ -808,9 +824,11 @@
 
 +comment("section mp-content style")
 .mp-heading
-  font: 600 25px/1 $main-font
+  font: 600 16px/1 $main-font
   color: #000
   letter-spacing: 1.25px
+  +r($md)
+    font-size: 25px
 .mp-descr
   font: 400 13px/18px $main-font
   color: #000
@@ -1228,8 +1246,10 @@
   display: flex
   flex-wrap: wrap
   padding-right: 25px
-  &>div
+  &>div:not([class])
     +col(24)
+  .help-block
+    margin: 0
   &--fluid
     padding-right: 0
   &--inner
@@ -1243,7 +1263,8 @@
     margin-right: 5px
   &__rdbox
     width: 100%
-  &__control
+  &__control,
+  &__inner
     +col(24)
     &--max-90
       +col(90px)
@@ -1268,6 +1289,8 @@
     &--60
       +col
       max-width: 60%
+    & + #{$this}__inner
+      margin-left: 10px
   &__btn-info
     position: absolute
     top: 50%
@@ -1282,6 +1305,7 @@
     right: 5px
     cursor: pointer
     z-index: 2
+
 
 .pl-form-group,
 .field-signinform-password,
@@ -1835,6 +1859,8 @@
 +comment("section ct-account style")
 .ct-account
   margin-bottom: 45px
+  &__heading
+    margin-top: 0
 .ct-heading
   margin-top: 0
   font: 400 16px/22px $main-font
@@ -1848,7 +1874,8 @@
 
 +comment("section ct-password style")
 .ct-password
-  margin-bottom: 45px
+  +r($md)
+    margin-bottom: 45px
   &__descr
     margin-bottom: 15px
     font-weight: 500
@@ -1858,21 +1885,44 @@
 
 +comment("section ct-profile style")
 .ct-profile
-  margin-bottom: 45px
+  display: flex
+  flex-wrap: wrap
+  align-items: flex-end
+  +r($md)
+    margin-bottom: 45px
+  &__figure
+    +col(10)
+    margin-right: 10px
+    +r($md)
+      +col(24)
+      margin-right: 0
+  &__btn-group
+    +col(14)
+    +r($md)
+      +col(24)
 
 .ct-btn-group
   display: flex
   flex-wrap: wrap
+  flex-direction: column-reverse
   margin:
     left: -5px
     right: -5px
+  +r($md)
+    flex-direction: row
   &__item
-    +col
+    margin: 
+      bottom: 15px
     padding: 
       left: 5px
       right: 5px
+    +r($md)
+      +col
+      margin:
+        bottom: 0
     &--right
-      +col(auto)
+      +r($md)
+        +col(auto)
   &__btn
 .ct-figure
   margin-bottom: 15px
