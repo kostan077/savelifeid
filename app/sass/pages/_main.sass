@@ -418,7 +418,7 @@
 
 +comment("section in-intro style")
 .in-heading
-  font: 400 15px/19px $main-font
+  font: 400 20px/25px $main-font
   color: #f2f2f2
   letter-spacing: 2px
   +r($sm)
@@ -482,9 +482,12 @@
 
 +comment("section wm-welcome style")
 .wm-heading
-  font: 700 27px/34px $main-font
+  font: 700 18px/24px $main-font
   color: #000
   letter-spacing: 1.26px
+  +r($md)
+    font-size: 27px
+    line-height: 34px
 .wm-welcome
   margin-bottom: 4px
   padding: 12px 0 10px
@@ -563,14 +566,16 @@
     @extend .img-fluid
     +col(60px)
 .cm-item
+
   position: relative
   display: flex
   flex-wrap: wrap
   align-items: center
-  min-height: 119px
-  padding: 7px 7px 7px 10px
-  border-radius: 35px 4px 35px 4px
+  margin-left: 49px
+  min-height: 97px
+  padding-left: 60px
   background-color: #dadada
+  border-radius: 0 10px 10px 0
   font: 500 16px/20px $main-font
   color: #000
   letter-spacing: 1.25px
@@ -586,8 +591,23 @@
     box-shadow: 0 0 5px 3px #d9edf7
   &:focus
     color: #337ab7
+  +r($md)
+    margin:
+      left: 0
+    padding: 7px 7px 7px 10px
+    min-height: 119px
+    border-radius: 35px 4px 35px 4px
   &__figure
+    position: absolute
+    top: 50%
+    left: 0
+    transform: translate(-50%, -50%)
     margin-right: 16px
+    +r($md)
+      position: static
+      transform: none
+      top: auto
+      left: auto
   &__text
     +col
     margin-bottom: 0
@@ -1789,6 +1809,8 @@
             background-color: #ededec
   &--bordered
     thead
+      +rx($md - 1)
+        display: none
       th
         padding: 5px 15px
         border: 
@@ -1808,6 +1830,9 @@
         a
           color: #fff
     tbody
+      tr
+        +rx($md - 1)
+
       td,
       th
         padding: 10px 12px
@@ -1823,6 +1848,29 @@
           border-radius: 0 0 0 6px
         &:last-of-type
           border-radius: 0 0 6px 0
+      th
+        +rx($md - 1)
+          border: none
+      td
+        +rx($md - 1)
+          position: relative
+          min-height: 37px
+          padding: 0
+          float: left
+          width: 100%
+          border: 1px solid #a8a8a8
+          border-radius: 10px
+          background-color: transparent
+        &:before
+          +rx($md - 1)
+            content: attr(data-col-seq)
+            background-color: #a8a8a8
+            height: 100%
+            border-radius: 10px 0 0 10px
+            text-transform: capitalize
+            font: 400 13px/15px $main-font
+            color: #fff
+
 
 .mp-tabs-control
   display: flex
