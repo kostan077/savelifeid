@@ -422,8 +422,11 @@
   color: #f2f2f2
   letter-spacing: 2px
   +r($sm)
+    font-size: 25px
+    letter-spacing: 4px
+    line-height: 30px
+  +r($md)
     font-size: 37px
-    font-weight: 400
     letter-spacing: 6px
     line-height: 47px
 .in-intro
@@ -1396,6 +1399,8 @@
     color: #4f4f4f
   & + #{$this}
     margin-left: 10px
+  +rx($md - 1)
+    width: 100%
   &--textarea
     min-height: 90px
     resize: none
@@ -1832,6 +1837,12 @@
     tbody
       tr
         +rx($md - 1)
+          &+tr
+            th
+              border-top: 1px solid #a8a8a8
+        &:nth-of-type(n)
+          +rx($md - 1)
+            background-color: transparent
 
       td,
       th
@@ -1845,32 +1856,50 @@
         color: #000
         letter-spacing: .85px
         &:first-of-type
-          border-radius: 0 0 0 6px
+          +r($md)
+            border-radius: 0 0 0 6px
         &:last-of-type
-          border-radius: 0 0 6px 0
+          +r($md)
+            border-radius: 0 0 6px 0
       th
         +rx($md - 1)
+          padding: 10px 12px
+          position: relative
+          float: left
+          width: 100%
           border: none
+          margin-top: 10px
+          padding:
+            top: 14px
+            bottom: 14px
       td
         +rx($md - 1)
           position: relative
           min-height: 37px
-          padding: 0
+          margin-bottom: 10px
+          padding: 
+            top: 10px
+            right:  12px
+            bottom: 10px
+            left: 112px
           float: left
           width: 100%
           border: 1px solid #a8a8a8
+          background-image: linear-gradient(90deg,#a8a8a8 100px, transparent 100px)
           border-radius: 10px
-          background-color: transparent
+          overflow: hidden
         &:before
           +rx($md - 1)
             content: attr(data-col-seq)
-            background-color: #a8a8a8
-            height: 100%
-            border-radius: 10px 0 0 10px
+            position: absolute
+            padding: 10px 12px
+            top: 50%
+            left: 0
+            width: 100px
+            transform: translateY(-50%)
             text-transform: capitalize
             font: 400 13px/15px $main-font
             color: #fff
-
 
 .mp-tabs-control
   display: flex
@@ -1987,10 +2016,20 @@
 
 +comment("section bl-billing style")
 
+.bl-billing
+  &__card
+    margin-bottom: 15px
+    width: 100%
+
 +comment("section bl-subscribe style")
 .bl-subscribe,
 .pinfo-section
-  margin-bottom: 45px
+  +r($md)
+    margin-bottom: 45px
+  &--hidden-xs
+    display: none
+    +r($md)
+      display: block
 
 .dt-danger-text
   font: 400 13px/15px $main-font
@@ -2002,9 +2041,11 @@
 .pinfo-heading
   margin-top: 0
   margin-bottom: 15px
-  font: 400 25px/1 $main-font
+  font: 400 16px/1 $main-font
   color: #000
   letter-spacing: 1.25px
+  +r($md)
+    font-size: 25px
 
 .pinfo-section .mp-text
   color: #000

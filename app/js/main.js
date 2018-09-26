@@ -298,11 +298,11 @@ const SLID = SLID || {};
   // # Page Settings
   // ============================================================================= //
   SLID.pageSettings = {
-    init() {
+    init(fieldsetId, controlButtonId) {
       this.svgPolifill()
       this.generateNewAlert()
       this.demographicToggle()
-      this.triggerFormControl()
+      this.triggerFormControl(fieldsetId, controlButtonId)
       this.toggleContent()
     },
     svgPolifill() {
@@ -353,23 +353,51 @@ const SLID = SLID || {};
         $(this).toggleClass(activeClassName)
       })
     },
-    triggerFormControl() {
-      const $btnControl =      $("[data-form-control]")
+    triggerFormControl(fieldsetId, controlButtonId) {
+      const $btnControl =      $(`#${controlButtonId}`)
+      const $contents =        $(`#${fieldsetId}`)
       const toggleClassName =  'pl-info__add--decline'
-      const $contents =        $("[data-form-toggle]")
+      const isContentsErrors = $contents.is('.has-errors')
 
-      $contents.hide()
+      if($contents.length) 
+        isContentsErrors ? $contents.show() : $contents.hide()
+
+      if(!$btnControl.length) return false
 
       $btnControl.on("click", function(e) {
         const $this = $(this)
         const toggleHtml =       $this.data("form-control-toggle")
         const currentHtml =      $this.html()
-        const $toggleContent =   $this.closest("[data-form]").find("[data-form-toggle]")
+        const $toggleContent =   $(`#${fieldsetId}`)
+
+        const $form =            $this.closest('.js-block-form')
+        const $toggleBtnSubmit = $form.find('.js-form-submit')
+
+        const $showIcon =        $this.find('.js-show-icon')
+        const $hasErrorData =    $this.find('.js-has-error-icon')
+        const templateIcon =     $this.parent().find('.js-template-icon').html()
+
+        const isHideShownIcon = $showIcon.is('.hide')
+
+        if (isHideShownIcon && $hasErrorData.length && !$(toggleButtonText).length)
+          toggleButtonText = templateIcon + toggleButtonText
+
 
         $this.html(toggleHtml)
         $this.data("form-control-toggle", currentHtml)
         $this.toggleClass(toggleClassName)
-        $toggleContent.stop().slideToggle()
+
+
+        $toggleContent.clearQueue().finish().slideToggle(() => {
+
+            if ($toggleContent.is(':visible')) {
+                $toggleBtnSubmit.show()
+            }
+            else {
+                $toggleBtnSubmit.hide()
+                $form[0].reset()
+            }
+        })
 
         e.preventDefault()
       })
@@ -401,6 +429,39 @@ const SLID = SLID || {};
   // ============================================================================= //
   SLID.basicElements = {
     init() {
+      this.dropdown()
+    },
+    dropdown() {
+      $(document).on('click', '[data-dropdown-toggle]', e => {
+        e.preventDefault()
+
+        const $this =            $(e.currentTarget)
+        const target =           $this.data('dropdown-toggle')
+        const $dropdown =        $(target)
+        const controlActive =    ($this.is('[data-dropdown-toggle-class]')) ? $this.data('dropdown-toggle-class') : null
+        const dropdownActive =   ($this.is('[data-dropdown-toggle-target-class]')) ? $this.data('dropdown-toggle-target-class') : null
+        const isOnce =           ($this.is('[data-dropdown-toggle-once]')) ? true : false
+        const isScroll =         ($this.is('[data-dropdown-toggle-scroll]')) ? true : false
+        const scroll =           $(window).scrollTop()
+        const afterSlide =       () => {
+          if (isScroll && $dropdown.is(":visible")) { 
+            $('html, body').animate({
+              scrollTop: $dropdown.offset().top - 15
+            }, 333)
+          }
+        }
+
+
+        if (!$dropdown.length) return
+
+        $this.toggleClass(controlActive)
+        $dropdown.toggleClass(dropdownActive)
+
+        if (isOnce && $dropdown.is(":visible")) 
+          afterSlide()
+        else 
+          $dropdown.stop().slideToggle(afterSlide)
+      })
     },
   }
 
