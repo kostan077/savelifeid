@@ -295,6 +295,36 @@
       border-color: #54b9e4 * 1.1
       color: #54b9e4 * 1.1
       background-color: transparent
+  &--primary-left
+    background-color: #bdbdbd
+    border: 2px solid #bdbdbd
+
+    &:hover
+      background-color: transparent
+      color: #bdbdbd
+    &:focus
+      background-color: #bdbdbd * 1.2
+      color: #fff
+      border-color: #bdbdbd * 1.2
+
+    &:active
+      border-color: #bdbdbd * 1.1
+      color: #bdbdbd * 1.1
+      background-color: transparent
+    +r($md)
+      background-color: #54b9e4
+      border: 2px solid #54b9e4
+      &:hover
+        background-color: transparent
+        color: #54b9e4
+      &:focus
+        background-color: #337ab7
+        color: #fff
+        border-color: #337ab7
+      &:active
+        border-color: #54b9e4 * 1.1
+        color: #54b9e4 * 1.1
+        background-color: transparent
 
   &--icon
     padding: 4.5px 6px
@@ -809,9 +839,11 @@
     padding-right: 15px
     padding-left: 15px
     &--1
-      +col
+      +r($md)
+        +col
     &--2
-      +col(auto)
+      +r($md)
+        +col(auto)
   &__list
   .cm-card
     margin-top: 48px
@@ -820,6 +852,7 @@
 
 .mp-list
   $this: &
+  position: relative
   display: flex
   justify-content: space-between
   margin: 0
@@ -834,11 +867,18 @@
   +cm("*")
   +cm("*!")
   &__item
-    position: relative
     +col
+    display: flex
+    align-items: center
+    height: .5em
+    background-color: #bdbdbd
     cursor: pointer
     color: #000
     z-index: 2
+    +r($md)
+      position: relative
+      height: auto
+      background-color: transparent
     &:hover
       color: #337ab7
     &:active
@@ -861,7 +901,6 @@
       transition: all .15s linear
       z-index: 1
     &:before
-      content: ''
       position: absolute
       top: 50%
       left: 0
@@ -870,7 +909,10 @@
       height: .5em
       background-color: #54b9e4
       z-index: -1
+      +r($md)
+        content: ''
     &:last-of-type
+      background-color: transparent
       &:before
         content: none
     &:nth-child(-n+9)
@@ -878,8 +920,10 @@
         letter-spacing: 0
     &--active
       &:after
-        content: counter(list)
+        content: ''
         box-shadow: 0 0 0 .188em #64caf0
+        +r($md)
+          content: counter(list)
       &:before
         background-color: #bdbdbd
       &~#{$this}__item
@@ -887,18 +931,26 @@
           background-color: #bdbdbd
         &:before
           background-color: #bdbdbd
+      #{$this}__text
+        display: inline
 
   &__text
     position: absolute
-    top: -.325em
-    left: .25em
-    transform: translateY(-50%) rotate(-39deg)
-    transform-origin: 0 0
+    left: 0
+    top: 0
+    display: none
     font: 400 .750em/1 $main-font
     color: inherit
     letter-spacing: 0.7px
     white-space: nowrap
     transition: all .3s ease-out
+
+    +r($md)
+      top: -.325em
+      left: .25em
+      transform: translateY(-50%) rotate(-39deg)
+      transform-origin: 0 0
+      display: inline
 
 +comment("section mp-content style")
 .mp-heading
@@ -958,12 +1010,16 @@
 .mp-header
   position: relative
   padding:
-    top: 45px
+    top: 15px
     left: 15px
   min-height: 100px
   z-index: 1
+  +r($md)
+    padding:
+      top: 45px
+      left: 15px
+    min-height: 100px
   &:before
-    content: attr(data-tabs-content-counter)
     position: absolute
     width: 212px
     top: 0
@@ -973,6 +1029,8 @@
     color: #e4f2fa
     text-align: center
     z-index: -1
+    +r($md)
+      content: attr(data-tabs-content-counter)
   &__heading
     margin-bottom: 4px
   &__notify
