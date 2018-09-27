@@ -49,7 +49,7 @@
     border-radius: 5px
     border: 2px solid #27ae60
     background-color: #27ae60
-    font: 700 12px/16px $main-font
+    font: 600 12px/16px $main-font
     color: #fff    
     text-transform: uppercase
     text-decoration: none
@@ -70,6 +70,52 @@
       background-color: transparent
       color: #27ae60 * 1.1
       border-color: #27ae60 * 1.1
+    #{$this}__icon
+      margin-right: 5px
+    .text-primary
+      flex: 0 0 auto
+      max-width: 100%
+      margin-right: 5px
+      font-size: 16px
+      color: inherit
+      &~ #{$this}__icon
+        @extend .hidden-accessible
+  &--danger
+    padding: 9px 14px
+    border-radius: 5px
+    border: 2px solid #FF5A5A
+    background-color: #FF5A5A
+    font: 600 12px/16px $main-font
+    color: #fff    
+    text-transform: uppercase
+    text-decoration: none
+    transition: all .3s ease-out
+    .text-primary
+      color: inherit
+    &:hover,
+    &:focus
+      text-decoration: none
+    &:focus
+      background-color: #FF5A5A * 0.8
+      color: #fff
+      border-color: #FF5A5A * 0.8
+    &:hover
+      background-color: transparent
+      color: #FF5A5A
+    &:active
+      background-color: transparent
+      color: #FF5A5A * 1.1
+      border-color: #FF5A5A * 1.1
+    #{$this}__icon
+      margin-right: 5px
+    .text-primary
+      flex: 0 0 auto
+      max-width: 100%
+      margin-right: 5px
+      font-size: 16px
+      color: inherit
+      &~ #{$this}__icon
+        @extend .hidden-accessible
   &--primary
     padding: 9px 14px
     border-radius: 5px
@@ -141,6 +187,14 @@
       background-color: #979797 * 0.7
       color: #fff
       border-color: #979797 * 0.7
+    .text-primary
+      flex: 0 0 auto
+      max-width: 100%
+      margin-right: 5px
+      font-size: 16px
+      color: inherit
+      &~ #{$this}__icon
+        @extend .hidden-accessible
   &--submit
     padding: 4px 14px
     border-radius: 5px
@@ -266,6 +320,9 @@
       border: 1px solid #48b7e5 !important
       background-color: #48b7e5 !important
       color: #fff
+  &--wide
+    margin-bottom: 15px
+    width: 100%
 
 
 .img-fluid
@@ -705,8 +762,6 @@
     justify-content: center
     +r($md)
       flex-direction: row
-      display: inline-block
-      vertical-align: top
 .ft-nav
   padding: 13px 20px
   +r($md)
@@ -1053,6 +1108,8 @@
     float: none
     @extend .hidden-accessible
     &+ label
+      display: inline-block
+      vertical-align: top
       width: auto
       height: auto
       padding:
@@ -1872,6 +1929,8 @@
           padding:
             top: 14px
             bottom: 14px
+        +r($md)
+          display: none
       td
         +rx($md - 1)
           position: relative
@@ -1893,10 +1952,9 @@
             content: attr(data-col-seq)
             position: absolute
             padding: 10px 12px
-            top: 50%
+            top: 0
             left: 0
             width: 100px
-            transform: translateY(-50%)
             text-transform: capitalize
             font: 400 13px/15px $main-font
             color: #fff
@@ -2485,3 +2543,64 @@
   &:hover
     color: #d9534f
     border-color: #d9534f
+
++comment("page faq style")
+
++comment("section faq style")
+.faq
+  &__accordion
+  &__heading
+    color: #6aa3cc
+.fq-accordion
+  &__heading
+    padding: 10px
+    border-radius: 10px 10px 0 0
+  &__control
+    display: flex
+    text-decoration: none
+    &:hover,
+    &:focus
+      text-decoration: none
+    &:before
+      content: "-"
+      +col(15px)
+      margin:
+        right: 10px
+      font: 600 28px/12px $main-font
+      color: #000
+      text-align: center
+    &.collapsed
+      &:before
+        content: "+"
+        line-height: 17px
+  &__body
+    padding: 15px
+    border: 
+      top: none !important
+      right: 1px solid rgba(190, 190, 190, 0.8)
+      bottom: 1px solid rgba(190, 190, 190, 0.8)
+      left: 1px solid rgba(190, 190, 190, 0.8)
+    border-radius: 0 0 10px 10px
+    box-shadow: none
+    font: 400 15px/25px $main-font
+    color: #000
+    letter-spacing: .85px
+    +r($md)
+      padding: 15px 33px
+    p
+      font: inherit
+
++comment("page manage style")
+
++comment("section ids style")
+.ids
+  display: flex
+  flex-direction: column
+  &__heading
+    margin-bottom: 30px
+  &__table
+    margin-bottom: 15px
+  &__btn-group
+    +r($md)
+      order: 1
+      max-width: 320px
