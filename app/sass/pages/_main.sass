@@ -822,6 +822,10 @@
       top: -40px
       left: auto
       right: auto
+      bottom: 15px
+    +r($md)
+      margin: 
+        bottom: 0
   &__container
     max-width: 780px
     margin: 
@@ -855,17 +859,23 @@
   position: relative
   display: flex
   justify-content: space-between
-  margin: 0
-  padding: 8.25em .625em 1em
-  counter-reset: list
+  margin: 
+    bottom: 25px
+  padding: 11.25em .625em 1em 35%
+  counter-reset: list mList
   list-style-type: none
   +cm("!* ")
   +cm("* You can zoom this list, by changing font-size value")
   +cm("*")
-  font-size: 16px
+  font-size: 5px
+  +r($md)
+    font-size: 16px
   +cm("*")
   +cm("*")
   +cm("*!")
+  +r($md)
+    margin: 0
+    padding: 8.25em .625em 1em
   &__item
     +col
     display: flex
@@ -875,14 +885,18 @@
     cursor: pointer
     color: #000
     z-index: 2
+    &:hover,
+    &:focus,
+    &:active
+      color: #000
     +r($md)
       position: relative
       height: auto
       background-color: transparent
-    &:hover
-      color: #337ab7
-    &:active
-      color: #337ab7 * 1.4
+      &:hover
+        color: #337ab7
+      &:active
+        color: #337ab7 * 1.4
 
     &:after
       content: ''
@@ -892,14 +906,16 @@
       transform: translateX(-50%)
       display: flex
       justify-content: center
-      align-items: center
-      background-color: #3d91b5
+      align-items: center    
+      background-color: #bdbdbd
       border-radius: 50%
       font: 700 1em/1 $main-font
       color: #fff
       letter-spacing: -1.15px
       transition: all .15s linear
       z-index: 1
+      +r($md)
+        background-color: #3d91b5
     &:before
       position: absolute
       top: 50%
@@ -921,9 +937,11 @@
     &--active
       &:after
         content: ''
-        box-shadow: 0 0 0 .188em #64caf0
+        background-color: #37a7e0
         +r($md)
           content: counter(list)
+          background: #3d91b5
+          box-shadow: 0 0 0 .188em #64caf0
       &:before
         background-color: #bdbdbd
       &~#{$this}__item
@@ -931,26 +949,57 @@
           background-color: #bdbdbd
         &:before
           background-color: #bdbdbd
+    &:not(#{$this}__item--active)
       #{$this}__text
-        display: inline
+        +rx($md - 1)
+          border: 0 !important
+          clip: rect(0 0 0 0) !important
+          height: 1px !important
+          margin: -1px !important
+          overflow: hidden !important
+          padding: 0 !important
+          position: absolute !important
+          width: 1px !important
 
   &__text
     position: absolute
-    left: 0
-    top: 0
-    display: none
-    font: 400 .750em/1 $main-font
+    left: 24px
+    top: 100%
+    font: 600 11px/1 $main-font
     color: inherit
     letter-spacing: 0.7px
     white-space: nowrap
-    transition: all .3s ease-out
+    text-align: center
 
     +r($md)
+      display: inline
       top: -.325em
       left: .25em
       transform: translateY(-50%) rotate(-39deg)
       transform-origin: 0 0
-      display: inline
+      font-size: .750em
+      font-weight: 400
+      text-align: left
+      transition: all .3s ease-out
+  &__counter
+    position: absolute
+    bottom: -10px
+    left: -10px
+    display: flex
+    align-items: center
+    justify-content: center
+    font: 700 12px/1 $main-font
+    color: #cfe7f5
+    z-index: -1
+    &:before
+      content: counter(mList)
+      counter-increment: mList
+      margin-top: 18px
+      font-size: 57px
+      +r($md)
+        content: none
+    +r($md)
+      display: none
 
 +comment("section mp-content style")
 .mp-heading
@@ -964,7 +1013,6 @@
   color: #000
   letter-spacing: .75px
 .mp-text
-  padding-left: 15px
   font: 400 14px/18px $main-font
   color: #757575
 .mp-content
@@ -1007,12 +1055,13 @@
     margin-bottom: 15px
   &__tabs
     margin-bottom: 15px
+  &__text
+    +r($md)
+      padding-left: 15px
 .mp-header
   position: relative
   padding:
     top: 15px
-    left: 15px
-  min-height: 100px
   z-index: 1
   +r($md)
     padding:
@@ -1215,9 +1264,7 @@
     right: -4px
     bottom: 13px
   &__item
-    +col(auto)
-    +r($md)
-      +col(8)
+    +col(8)
 .ah-chkbox-btn
   $this: &
   padding: 4px
@@ -1664,6 +1711,7 @@
     line-height: 19px
     font-family: $main-font
     letter-spacing: .85px
+    word-break: break-all
     color: #000
   &__heading
     display: table-cell
