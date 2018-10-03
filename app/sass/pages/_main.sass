@@ -884,7 +884,6 @@
     background-color: #bdbdbd
     cursor: pointer
     color: #000
-    z-index: 2
     &:hover,
     &:focus,
     &:active
@@ -893,6 +892,7 @@
       position: relative
       height: auto
       background-color: transparent
+      z-index: 2
       &:hover
         color: #337ab7
       &:active
@@ -1430,7 +1430,9 @@
   position: relative
   display: flex
   flex-wrap: wrap
-  padding-right: 25px
+  padding-right: 30px
+  +r($md)
+    padding-right: 25px
   &>div:not([class])
     +col(24)
   .help-block
@@ -1722,34 +1724,68 @@
   display: flex
   flex-wrap: wrap
   margin: 
-    left: -5px
-    right: -5px
+    left: -2px
+    right: -3px
   padding: 0
   list-style-type: none
+  +r($md)
+    margin: 
+      left: -5px
+      right: -5px
   &__item
     position: relative
     width: 100%
     min-height: 1px
-    padding-right: 5px
-    padding-left: 5px
+    padding:
+      right: 2px
+      left: 3px
     +col(auto)
     line-height: 0
+    +r($md)
+      padding:
+        right: 5px
+        left: 5px
     &--hr
-      padding-right: 10px
+      padding:
+        right: 3px
+      +r($md)
+        padding:
+          right: 10px
       // border-right: 1px solid #000
       &+ #{$this}__item
-        padding-left: 10px
-        border-left: 1px solid #000
+        padding:
+          left: 3px
+        border: 
+          left: 1px solid #000
+        +r($md)
+          padding:
+            left: 10px
   &__heading
     font-weight: 600
+  &__delete
+    font-size: 13px
+    .btn__icon
+      font-size: inherit
+    +r($md)
+      font-size: 14px
+  &__edit
+    font-size: 13px
+    .btn__icon
+      font-size: inherit
+    +r($md)
+      font-size: 14px
 
 .pl-btn-split
   $this: &
   display: flex
   flex-wrap: wrap
   margin:
-    left: -5px
-    right: -5px
+    left: -2px
+    right: -3px
+  +r($md)
+    margin:
+      left: -5px
+      right: -5px
   input[type="checkbox"]
     display: block
     float: none
@@ -1759,8 +1795,8 @@
       display: flex
       align-items: center
       padding: 
-        left: 5px
-        right: 5px
+        left: 2px
+        right: 3px
       width: auto
       height: auto
       border-radius: 0
@@ -1769,16 +1805,24 @@
       border: none
       background-color: transparent
       cursor: pointer
-      font: 400 14px/16px $main-font
+      font: 400 12px/16px $main-font
       color: #808184
       text-transform: uppercase
       text-align: center
       transition: all .3s ease-out
       z-index: 2
+      +r($md)
+        padding: 
+          left: 5px
+          right: 5px
+        font-size: 14px
       &:before
         margin:
           bottom: 0
-          right: 5px
+          right: 2px
+        +r($md)
+          margin:
+            right: 5px
         line-height: 0
       &:hover
         color: #337ab7
@@ -1829,6 +1873,10 @@
     padding:
       left: 10px
       right: 10px
+  &__heading
+    margin-bottom: 0
+  &__item
+    margin-bottom: 15px
 .pl-rdbox-btn
   $this: &
   padding: 0
@@ -2488,7 +2536,7 @@
 +comment("section emergency contacts style")
 .pl-info__fieldset .pl-info_condition
   .pl-form-group.pl-info__group
-    padding-right: 0
+    //padding-right: 0
     .pl-rdbox-group.pl-form-group__rdbox
       justify-content: space-between
       margin-right: 0
@@ -2500,7 +2548,8 @@
     right: 0
     padding-right: 0
   .pl-info__col
-    &.field-add-notify_sms, &.field-add-notify_email
+    &.field-add-notify_sms, 
+    &.field-add-notify_email
       padding-right: 0
   .pl-rdbox-group__item
     #add-notify_sms, 
@@ -2512,8 +2561,8 @@
 .alert-danger .remove-warning
   top: -1px
 
-.pl-info__col div:not(.iti-flag)
-  width: 100%
+//.pl-info__col div:not(.iti-flag)
+//  width: 100%
 
 .tt-menu .tt-suggestion
   white-space: normal !important
