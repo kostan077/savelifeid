@@ -356,7 +356,7 @@ const SLID = SLID || {};
     triggerFormControl(fieldsetId, controlButtonId) {
       const $btnControl =      $(`#${controlButtonId}`)
       const $contents =        $(`#${fieldsetId}`)
-      const toggleClassName =  'pl-info__add--decline'
+      const toggleClassName =  'pl-info__add--decline btn--primary btn-default'
       const isContentsErrors = $contents.is('.has-errors')
 
       if($contents.length) 
@@ -386,7 +386,7 @@ const SLID = SLID || {};
         $this.html(toggleHtml)
         $this.data("form-control-toggle", currentHtml)
         $this.toggleClass(toggleClassName)
-
+        $this.blur()
 
         $toggleContent.clearQueue().finish().slideToggle(() => {
 

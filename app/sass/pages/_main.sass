@@ -80,6 +80,7 @@
       color: inherit
       &~ #{$this}__icon
         @extend .hidden-accessible
+
   &--danger
     padding: 9px 14px
     border-radius: 5px
@@ -132,8 +133,9 @@
     &:hover
       background-color: transparent !important
       color: #48b7e5 !important
-      .glyphicon-remove
-        color:#D9534F
+      .glyphicon 
+        transition: all .3s ease-out
+        color: #48b7e5
     &:active
       background-color: transparent
       color: #48b7e5 * 1.1
@@ -144,15 +146,11 @@
       border-color: #48b7e5 * 0.7
     #{$this}__icon
       margin-right: 5px
-    .glyphicon-remove
-      color: #fff
-      font-size: 13px
-    .glyphicon-plus
-      color: #fff
-      font-size: 13px
-      top: 1px
     .glyphicon
+      color: #fff
+      font-size: 13px
       top: 2px
+      transition: all .3s ease-out
     .text-primary
       flex: 0 0 auto
       max-width: 100%
@@ -265,6 +263,7 @@
 
   &--fluid
     width: 100%
+    padding: 9px 0
   &--primary-left,
   &--primary-right
     position: relative
@@ -376,7 +375,7 @@
 .header
   &#header
     +r($md)
-      padding: 20px 0 10px
+      padding: 5px 0
   &__container
     max-width: 900px
     margin:
@@ -410,6 +409,11 @@
     +col(auto)
     display: block
     padding: 18px 18px 18px 12px
+  &__mark
+    +col(auto)
+    display: block
+    padding: 18px 18px 15px 12px
+
   &__profile
     +col(auto)
     padding:
@@ -502,6 +506,21 @@
     color: #337ab7
   &__icon
     font-size: 24px
+.hd-mark
+  color: #666
+  text-decoration: none
+  transition: all .3s ease-out
+  &:hover,
+  &:focus
+    text-decoration: none
+    color: #337ab7
+  &:active,
+    color: #337ab7 * 1.2
+  &:focus
+    text-decoration: none
+    color: #337ab7
+  &__icon
+    font-size: 24px
 
 +comment("section in-intro style")
 .in-heading
@@ -526,11 +545,9 @@
   background-size: cover
   z-index: 1
   +r($md)
-    margin-bottom: 24px
-    padding:
-      top: 30px
-      bottom: 30px
-    min-height: 
+    margin-bottom: 12px
+    padding: 0
+    min-height: 97px
   &:before
     +coverdiv
     background: url("/img/intro-bg-2.svg") no-repeat 20px 16px
@@ -1446,10 +1463,12 @@
   &--m0-right
     margin-top: 3px !important
     justify-content: flex-end
+  &--mb-0
+    margin-bottom: 0
   &__btn-toggle
     margin-right: 5px
-  &__rdbox
-    width: 100%
+  //&__rdbox
+  //  width: 100%
   &__control,
   &__inner
     +col(24)
@@ -1492,6 +1511,8 @@
     right: 5px
     cursor: pointer
     z-index: 2
+  &__rdbox
+    +col(24)
 
 
 .pl-form-group,
@@ -1864,15 +1885,13 @@
 .pl-rdbox-group
   display: flex
   flex-wrap: wrap
-  margin:
-    left: -10px
-    right: -10px
   align-items: center
   &__item
-    +col(auto)
-    padding:
-      left: 10px
-      right: 10px
+    +col(24)
+    margin: 
+      bottom: 15px
+    +r($md)
+      +col(auto)
   &__heading
     margin-bottom: 0
   &__item
@@ -2297,7 +2316,8 @@
     min-height: 1px
     padding-right: 15px
     padding-left: 15px
-    +col(12)
+    +r($md)
+      +col(12)
   &__heading
     text-align: center
 
@@ -2534,6 +2554,9 @@
   content: none
 
 +comment("section emergency contacts style")
+
++cm("That's contradict BEM methodology")
+  
 .pl-info__fieldset .pl-info_condition
   .pl-form-group.pl-info__group
     //padding-right: 0
