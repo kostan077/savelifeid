@@ -390,13 +390,21 @@ const SLID = SLID || {};
 
         $toggleContent.clearQueue().finish().slideToggle(() => {
 
-            if ($toggleContent.is(':visible')) {
-                $toggleBtnSubmit.show()
-            }
-            else {
-                $toggleBtnSubmit.hide()
-                $form[0].reset()
-            }
+          if ($toggleContent.is(':visible')) {
+            let $control = $('input[type=text]:visible', $form).first()
+
+            ($control.is('[data-krajee-typeahead]')) ?
+              $control = $control.next() :
+              null
+
+            $control.focus()
+
+            $toggleBtnSubmit.show()
+          }
+          else {
+            $toggleBtnSubmit.hide()
+            $form[0].reset()
+          }
         })
 
         e.preventDefault()

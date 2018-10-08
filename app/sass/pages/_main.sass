@@ -66,6 +66,8 @@
     &:hover
       background-color: transparent
       color: #27ae60
+      .glyphicon-remove 
+        color: #D9534F
     &:active
       background-color: transparent
       color: #27ae60 * 1.1
@@ -818,11 +820,13 @@
 
   &__link
     display: block
-    padding: 7px 22px
+    padding: 6px 10px
+    border: none
     font: 400 13px/17px $main-font
     color: #000
     text-transform: uppercase
-    letter-spacing: .3px
+    letter-spacing: .6px
+    transition: all .3s ease-out
     +r($md)
       display: inline
       padding: 
@@ -977,6 +981,10 @@
           padding: 0 !important
           position: absolute !important
           width: 1px !important
+    &__blocked
+      cursor: not-allowed
+      &:hover
+        color: #000
 
   &__text
     position: absolute
@@ -1075,6 +1083,24 @@
   &__text
     +r($md)
       padding-left: 15px
+.mp-sub-heading
+  margin-top: 0
+  font: 600 13px/16px $main-font
+  color: #000
+  text-transform: uppercase
+.mp-notify
+  display: flex
+  flex-wrap: wrap
+  margin:
+    left: -5px
+    right: -5px
+  &__item
+    +col(auto)
+    position: relative
+    min-height: 1px
+    padding-right: 5px
+    padding-left: 5px
+
 .mp-header
   position: relative
   padding:
@@ -1101,25 +1127,9 @@
     margin-bottom: 4px
   &__notify
     margin-top: auto
+    margin-bottom: 15px
     align-items: center
     justify-content: flex-end
-.mp-sub-heading
-  margin-top: 0
-  font: 600 13px/16px $main-font
-  color: #000
-  text-transform: uppercase
-.mp-notify
-  display: flex
-  flex-wrap: wrap
-  margin:
-    left: -5px
-    right: -5px
-  &__item
-    +col(auto)
-    position: relative
-    min-height: 1px
-    padding-right: 5px
-    padding-left: 5px
 .mp-figure
   display: inline-flex
   font: 600 12px/15px $main-font
@@ -1281,7 +1291,9 @@
     right: -4px
     bottom: 13px
   &__item
-    +col(8)
+    +col(auto)
+    +r($md)
+      +col(8)
 .ah-chkbox-btn
   $this: &
   padding: 4px
@@ -1367,6 +1379,8 @@
     z-index: 3
     &:hover
       color: #27ae60 * 1.15
+      .btn__icon
+        color: #2dc86e
     &:active
       box-shadow: 0 0 5px 1px #27ae60 * 1.2
     &:focus
@@ -1431,6 +1445,10 @@
   &__fieldset
     margin:
       bottom: 0
+  &__group
+    > .fix-position-field
+      margin-right: 10px
+      margin-left: 0px
 .pl-legend
   margin-bottom: 12px
   padding: 0
@@ -1450,6 +1468,11 @@
   padding-right: 30px
   +r($md)
     padding-right: 25px
+    @at-root
+      .fix-position-block
+        padding-right: 8px
+        > .select2-container--bootstrap
+          margin-right: 10px
   &>div:not([class])
     +col(24)
   .help-block
@@ -1476,25 +1499,25 @@
       +col(90px)
     &--20
       +col
-      max-width: 20%
+      max-width: 20% !important
     &--25
       +col
-      max-width: 25%
+      max-width: 25% !important
     &--30
       +col
-      max-width: 30%
+      max-width: 30% !important
     &--40
       +col
-      max-width: 40%
+      max-width: 40% !important
     &--45
       +col
-      max-width: 45%
+      max-width: 45% !important
     &--50
       +col
-      max-width: 50%
+      max-width: 50% !important
     &--60
       +col
-      max-width: 60%
+      max-width: 60% !important
     & + #{$this}__inner
       margin-left: 10px
   &__btn-info
@@ -1538,8 +1561,7 @@
 
 .pl-chkbox
   &__info 
-    .pl-btn-info 
-      padding-bottom: 4px
+    padding-bottom: 4px
 .pl-form-label
   font-size: 0
   line-height: 0
@@ -1606,7 +1628,7 @@
         option[hidden]
           display: none
   &[type=password]
-    font: small-caption
+    font: bold
     font-size: 12px
     letter-spacing: 2px
     +placeholder
@@ -1781,6 +1803,9 @@
         +r($md)
           padding:
             left: 10px
+    a
+      svg
+        min-height: 25px
   &__heading
     font-weight: 600
   &__delete
@@ -1807,11 +1832,30 @@
     margin:
       left: -5px
       right: -5px
+  &--eye-double
+    input[type="checkbox"]
+      &+ label
+        &:before
+          content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBoZWlnaHQ9IjE1LjQwNSIgd2lkdGg9IjI0IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNCAxNS40MDQ5OTkiPgogPGcgZmlsbC1vcGFjaXR5PSIuOTQxMTgiIHRyYW5zZm9ybT0ibWF0cml4KC43MjI3OCAwIDAgLjcyMjc4IC4wNTUxOTUgLTEuMTQyMikiIGZpbGw9IiM4MDgxODQiPgogIDxwYXRoIGQ9Im0xNi41NzUgMy4yNjNjLTkuMTYzMiAwLTE2LjU3NSA4Ljk3NS0xNi41NzUgOC45NzVzNi4wOTk5IDguOTczNCAxNi41NzUgOC45NzM0IDE2LjYzLTkuMTIyNiAxNi42My05LjEyMjYtNy40Njg1LTguODI1OS0xNi42My04LjgyNTl6bS0xMy43MDYgOC45NzVjMC0xLjIzNjIgNC41NTMtNS40ODc3IDEwLjY0Mi02LjY1NjctMS4yNDggMC41OTQxMS0yLjMwMzIgMS41MzU1LTMuMDQyMyAyLjcxNDEtMC43MzkxMSAxLjE3ODYtMS4xMzE2IDIuNTQ1OC0xLjEzMTYgMy45NDE4czAuMzkyNDggMi43NjMyIDEuMTMxNiAzLjk0MThjMC43MzkxIDEuMTc4NiAxLjc5NDMgMi4xMiAzLjA0MjMgMi43MTQxLTYuMDg4NC0xLjE2OS0xMC42NDItNS40Mi0xMC42NDItNi42NTV6bTE2Ljc4OCA2LjY3YzEuMjU2Ni0wLjU5MDEgMi4zMjAzLTEuNTMxNiAzLjA2NTgtMi43MTM1IDAuNzQ1NC0xLjE4MTkgMS4xNDE1LTIuNTU0OSAxLjE0MTUtMy45NTcxcy0wLjM5NjEtMi43NzUyLTEuMTQxNS0zLjk1NzFjLTAuNzQ1NS0xLjE4MTktMS44MDkyLTIuMTIzNC0zLjA2NTgtMi43MTM1IDYuMTA0NyAxLjEyOTcgMTAuNjc0IDUuMjg5MyAxMC42NzQgNi42NzE1cy00LjU2OTIgNS41NDAxLTEwLjY3NCA2LjY2OTh6bTIuNDcxNy02LjgyMzljMCAxLjExODgtMC4zMjc3IDIuMjEyNC0wLjk0MTggMy4xNDI2LTAuNjE0IDAuOTMwMi0xLjQ4NjcgMS42NTUyLTIuNTA3OCAyLjA4MzQtMS4wMjExIDAuNDI4MS0yLjE0NDYgMC41NDAxLTMuMjI4NiAwLjMyMTgtMS4wODQtMC4yMTgyLTIuMDc5Ny0wLjc1NjktMi44NjEyLTEuNTQ4cy0xLjMxMzctMS43OTktMS41MjkzLTIuODk2My0wLjEwNDktMi4yMzQ2IDAuMzE4LTMuMjY4MiAxLjEzOTItMS45MTcgMi4wNTgxLTIuNTM4NmMwLjkxOS0wLjYyMTU1IDEuOTk5NC0wLjk1MzMgMy4xMDQ2LTAuOTUzMyAxLjQ4MiAwIDIuOTAzMyAwLjU5NTk2IDMuOTUxMyAxLjY1NjhzMS42MzY3IDIuNDk5NiAxLjYzNjcgMy45OTk4eiIvPgogIDxwYXRoIGQ9Im0xNi41NCAxNC44MjRjMS40OTQ4IDAgMi43MDY2LTEuMjI2NiAyLjcwNjYtMi43Mzk4IDAtMS41MTMxLTEuMjExOC0yLjczOTgtMi43MDY2LTIuNzM5OHMtMi43MDY1IDEuMjI2Ni0yLjcwNjUgMi43Mzk4IDEuMjExNyAyLjczOTggMi43MDY1IDIuNzM5OHoiLz4KIDwvZz4KPC9zdmc+Cg==') !important
+        &+ label
+          &:before
+            content: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBoZWlnaHQ9IjE1LjQwNSIgd2lkdGg9IjI0IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNC4wMDAyMTggMTUuNDA0ODE5Ij4KIDxnIGZpbGw9IiM4MDgxODQiPgogIDxnIHRyYW5zZm9ybT0ibWF0cml4KC43MjI3OSAwIDAgLjcyMjc5IC0uMDAwMDA5Nzk2OCAtMS4xMDcyKSI+CiAgIDxwYXRoIGQ9Im0xMS45OCAxLjI1MmMtNi42MjI1IDAtMTEuOTggNi40ODYzLTExLjk4IDYuNDg2M3M0LjQwOTMgNi40ODYzIDExLjk4IDYuNDg2M2MwLjAzMzQzIDAgMC4wNjQzNS0wLjAwNTYgMC4wOTc2Ni0wLjAwNTl2LTIuNTE1NmMtMC4zMDQxNSAwLjAwOTQtMC42MDg2Mi0wLjAwNTctMC45MTAxNi0wLjA2NjQxLTAuNzg0LTAuMTU4LTEuNTAzNS0wLjU0OC0yLjA2ODQtMS4xMTktMC41NjQ4LTAuNTcyMi0wLjk0OTYtMS4zMDExLTEuMTA1NS0yLjA5NDItMC4xNTU4LTAuNzkzMS0wLjA3NTItMS42MTQyIDAuMjMwNS0yLjM2MTNzMC44MjIyLTEuMzg0NyAxLjQ4NjMtMS44MzRjMC42NjQxLTAuNDQ5MiAxLjQ0NTEtMC42ODk0IDIuMjQ0MS0wLjY4OTQgMC4wNDE2NCAwIDAuMDgxNTUgMC4wMTA0MjIgMC4xMjMwNSAwLjAxMTcxOXYtMi4yOTNjLTAuMDMyODktMC4wMDAzMTQ0LTAuMDY0Ny0wLjAwNTg2LTAuMDk3NjYtMC4wMDU4NnptMS43MzQ0IDAuMTU2MjV2Mi41NTY2YzAuMzk5NyAwLjE5NjkgMC43NzU0MSAwLjQ0NzI2IDEuMDk1NyAwLjc3MTQ4IDAuNzU3NDcgMC43NjY3NSAxLjE4MzYgMS44MDYzIDEuMTgzNiAyLjg5MDYgMCAwLjgwODY1LTAuMjM3NzggMS41OTkyLTAuNjgxNjQgMi4yNzE1LTAuMzk5MDggMC42MDQ2MS0wLjk1NDEzIDEuMDc5OS0xLjU5NzcgMS4zOTY1djIuNzk5YzYuNTA4LTAuODg3IDEwLjI4Ni02LjQ2MzEgMTAuMjg2LTYuNDYzMXMtNC40ODI1LTUuMjc5MS0xMC4yODUtNi4yMjI3em0wLjQ5MjE5IDEuNTA3OGM0LjQxMjQgMC44MTY1MiA3LjcxNDggMy44MjMyIDcuNzE0OCA0LjgyMjMgMCAwLjk5OTAzLTMuMzAyNCA0LjAwMzgtNy43MTQ4IDQuODIwMyAwLjkwODI1LTAuNDI2NTEgMS42NzgtMS4xMDY3IDIuMjE2OC0xLjk2MDkgMC41Mzg3Ni0wLjg1NDI1IDAuODI0MjItMS44NDU5IDAuODI0MjItMi44NTk0cy0wLjI4NTQ2LTIuMDA3MS0wLjgyNDIyLTIuODYxM2MtMC41MzgtMC44NTQzLTEuMzA4LTEuNTM0NS0yLjIxNi0xLjk2MXptLTQuNDQwNCAwLjAxMTdjLTAuOTAyIDAuNDI5NC0xLjY2NSAxLjEwOTEtMi4xOTkyIDEuOTYxLTAuNTM0MiAwLjg1MTgtMC44MTg0IDEuODQwNi0wLjgxODQgMi44NDk2czAuMjg0MTQgMS45OTU4IDAuODE4MzYgMi44NDc3YzAuNTM0MjEgMC44NTE4NyAxLjI5NzIgMS41MzM1IDIuMTk5MiAxLjk2MjktNC40MDA2LTAuODQ0OTMtNy42OTE0LTMuOTE3OS03LjY5MTQtNC44MTA1IDAtMC44OTM1IDMuMjkwNC0zLjk2NTYgNy42OTE0LTQuODEwNXoiIHRyYW5zZm9ybT0ibWF0cml4KDEuMzgzNSAwIDAgMS4zODM1IC4wMDAwMTM1NTQgMS41MzE2KSIgc3Ryb2tlLXdpZHRoPSIuNzIyNzgiIGZpbGw9IiM4MDgxODQiLz4KICA8L2c+CiAgPHBhdGggZD0ibTExLjQ3OC0wLjA3ODA0NXYxNS40ODMiIHN0cm9rZT0iIzgwODE4NCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KIDwvZz4KPC9zdmc+Cg==')
+  &--eye-single
+    input[type="checkbox"]
+      &+ label
+        &:before
+          content: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiIHN0YW5kYWxvbmU9Im5vIj8+CjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiBmaWxsPSJub25lIiBoZWlnaHQ9IjE1LjQwNSIgd2lkdGg9IjI0IiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCAyNC4wMDAyMTggMTUuNDA0ODE5Ij4KIDxnIGZpbGw9IiM4MDgxODQiPgogIDxnIHRyYW5zZm9ybT0ibWF0cml4KC43MjI3OSAwIDAgLjcyMjc5IC0uMDAwMDA5Nzk2OCAtMS4xMDcyKSI+CiAgIDxwYXRoIGQ9Im0xMS45OCAxLjI1MmMtNi42MjI1IDAtMTEuOTggNi40ODYzLTExLjk4IDYuNDg2M3M0LjQwOTMgNi40ODYzIDExLjk4IDYuNDg2M2MwLjAzMzQzIDAgMC4wNjQzNS0wLjAwNTYgMC4wOTc2Ni0wLjAwNTl2LTIuNTE1NmMtMC4zMDQxNSAwLjAwOTQtMC42MDg2Mi0wLjAwNTctMC45MTAxNi0wLjA2NjQxLTAuNzg0LTAuMTU4LTEuNTAzNS0wLjU0OC0yLjA2ODQtMS4xMTktMC41NjQ4LTAuNTcyMi0wLjk0OTYtMS4zMDExLTEuMTA1NS0yLjA5NDItMC4xNTU4LTAuNzkzMS0wLjA3NTItMS42MTQyIDAuMjMwNS0yLjM2MTNzMC44MjIyLTEuMzg0NyAxLjQ4NjMtMS44MzRjMC42NjQxLTAuNDQ5MiAxLjQ0NTEtMC42ODk0IDIuMjQ0MS0wLjY4OTQgMC4wNDE2NCAwIDAuMDgxNTUgMC4wMTA0MjIgMC4xMjMwNSAwLjAxMTcxOXYtMi4yOTNjLTAuMDMyODktMC4wMDAzMTQ0LTAuMDY0Ny0wLjAwNTg2LTAuMDk3NjYtMC4wMDU4NnptMS43MzQ0IDAuMTU2MjV2Mi41NTY2YzAuMzk5NyAwLjE5NjkgMC43NzU0MSAwLjQ0NzI2IDEuMDk1NyAwLjc3MTQ4IDAuNzU3NDcgMC43NjY3NSAxLjE4MzYgMS44MDYzIDEuMTgzNiAyLjg5MDYgMCAwLjgwODY1LTAuMjM3NzggMS41OTkyLTAuNjgxNjQgMi4yNzE1LTAuMzk5MDggMC42MDQ2MS0wLjk1NDEzIDEuMDc5OS0xLjU5NzcgMS4zOTY1djIuNzk5YzYuNTA4LTAuODg3IDEwLjI4Ni02LjQ2MzEgMTAuMjg2LTYuNDYzMXMtNC40ODI1LTUuMjc5MS0xMC4yODUtNi4yMjI3em0wLjQ5MjE5IDEuNTA3OGM0LjQxMjQgMC44MTY1MiA3LjcxNDggMy44MjMyIDcuNzE0OCA0LjgyMjMgMCAwLjk5OTAzLTMuMzAyNCA0LjAwMzgtNy43MTQ4IDQuODIwMyAwLjkwODI1LTAuNDI2NTEgMS42NzgtMS4xMDY3IDIuMjE2OC0xLjk2MDkgMC41Mzg3Ni0wLjg1NDI1IDAuODI0MjItMS44NDU5IDAuODI0MjItMi44NTk0cy0wLjI4NTQ2LTIuMDA3MS0wLjgyNDIyLTIuODYxM2MtMC41MzgtMC44NTQzLTEuMzA4LTEuNTM0NS0yLjIxNi0xLjk2MXptLTQuNDQwNCAwLjAxMTdjLTAuOTAyIDAuNDI5NC0xLjY2NSAxLjEwOTEtMi4xOTkyIDEuOTYxLTAuNTM0MiAwLjg1MTgtMC44MTg0IDEuODQwNi0wLjgxODQgMi44NDk2czAuMjg0MTQgMS45OTU4IDAuODE4MzYgMi44NDc3YzAuNTM0MjEgMC44NTE4NyAxLjI5NzIgMS41MzM1IDIuMTk5MiAxLjk2MjktNC40MDA2LTAuODQ0OTMtNy42OTE0LTMuOTE3OS03LjY5MTQtNC44MTA1IDAtMC44OTM1IDMuMjkwNC0zLjk2NTYgNy42OTE0LTQuODEwNXoiIHRyYW5zZm9ybT0ibWF0cml4KDEuMzgzNSAwIDAgMS4zODM1IC4wMDAwMTM1NTQgMS41MzE2KSIgc3Ryb2tlLXdpZHRoPSIuNzIyNzgiIGZpbGw9IiM4MDgxODQiLz4KICA8L2c+CiAgPHBhdGggZD0ibTExLjQ3OC0wLjA3ODA0NXYxNS40ODMiIHN0cm9rZT0iIzgwODE4NCIgc3Ryb2tlLXdpZHRoPSIxLjIiLz4KIDwvZz4KPC9zdmc+Cg==") !important
+        &+ label
+          &:before
+  label.js-eye-disabled
+    color: #000 !important
+
+
   input[type="checkbox"]
     display: block
     float: none
     @extend .hidden-accessible
-    &~ label
+    ~ label
       position: relative
       display: flex
       align-items: center
@@ -1886,10 +1930,16 @@
   display: flex
   flex-wrap: wrap
   align-items: center
+  margin:
+    left: -10px
+    right: -10px
   &__item
     +col(24)
     margin: 
       bottom: 15px
+    padding: 
+      left: -10px
+      right: -10px
     +r($md)
       +col(auto)
   &__heading
@@ -2403,6 +2453,7 @@
 .hp-welcome
   padding: 51px 0 17px
   //background-color: #7d92a4
+  background-image: url(/img/welcome.jpg)
   background-position: calc(50% + 35px) 0
   &__col
     margin-left: auto
@@ -2416,6 +2467,7 @@
 .hp-how
   padding: 20px 0
   //background-color: #c3babb
+  background-image: url(/img/discover.jpg)
   background-position: calc(50% + 35px) 50%
   &__col
     +col(36%)
@@ -2509,6 +2561,7 @@
 .hp-protect
   padding: 36px 0
   //background-color: #c3babb
+  background-image: url(/img/protection.jpg)
   background-position: calc(50% + 35px) 50%
   min-height: 525px
   &__container
@@ -2564,16 +2617,28 @@
       justify-content: space-between
       margin-right: 0
       margin-left: 0
-  .pl-form-group__rdbox .pl-rdbox-group__status
-    padding-left: 0
+  .pl-form-group__rdbox 
+    .pl-rdbox-group__status
+      padding: 13px 0 14px 0
+    .mp-rdbox-btn 
+      padding-bottom: 0
+      margin-bottom: 9px
+
   .pl-rdbox-group__item.pl-rdbox-group__condition
     flex: 1 auto
     right: 0
     padding-right: 0
+
   .pl-info__col
     &.field-add-notify_sms, 
     &.field-add-notify_email
       padding-right: 0
+    .pl-form-group.pl-info__group div:not(.intl-tel-input, .flag-container, .selected-flag)
+      width: 100%
+      white-space: normal
+    &.pl-info_condition .pl-form-group.pl-info__group .pl-rdbox-group.pl-form-group__rdbox div
+      width: auto
+      white-space: normal
   .pl-rdbox-group__item
     #add-notify_sms, 
     #add-notify_email
@@ -2599,6 +2664,7 @@
 .file-upload-progress-bar
   position: absolute
   height: 38px
+  border-radius: 5px
   background: #1f646f
   opacity: 0.7
 
@@ -2644,6 +2710,9 @@
   .select2-results__option--highlighted[aria-selected]
     background-color: #54b9e4 !important
     color: #fff
+.select2-selection.select2-selection--single
+  height: auto!important
+
 
 +comment("section credit card style")
 
@@ -2661,6 +2730,11 @@
   h2
     font-weight: 600
     font-size: 25px
+
+form#signInForm 
+  .btn
+    &:hover
+      color: #2f80ed
 
 +comment("bootstrap buttons overrides")
 
@@ -2721,6 +2795,30 @@
   &:hover
     color: #d9534f
     border-color: #d9534f
+
+.block-preview
+  margin-left: 16px
+
+.block-title
+  word-break: break-word
+
+.h-margin
+  margin-top: 10px
+  margin-bottom: 10px
+
+.preview-item
+  padding-bottom: 5px
+  border-bottom: 1px solid rgba(0,0,0,0.3)
+
+.preview-item:last-child
+  border-bottom: none
+.preview-item p.mp-descr
+  margin: 0 0 3px
+
+.eye-cursor-blocked
+  cursor: not-allowed !important
+.next-interval-left 
+  padding-top: 11px
 
 +comment("page faq style")
 
