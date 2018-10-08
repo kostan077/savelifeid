@@ -72,8 +72,7 @@
       background-color: transparent
       color: #27ae60 * 1.1
       border-color: #27ae60 * 1.1
-    #{$this}__icon
-      margin-right: 5px
+
     .text-primary
       flex: 0 0 auto
       max-width: 100%
@@ -379,6 +378,8 @@
     +r($md)
       padding: 5px 0
   &__container
+    display: flex
+    flex-wrap: wrap
     max-width: 900px
     margin:
       left: auto
@@ -391,6 +392,8 @@
     position: absolute
     +r($md)
       position: static
+      display: flex
+      align-items: center
 
 
 +comment("section signin-area style")
@@ -2248,6 +2251,8 @@
   align-items: flex-end
   +r($md)
     margin-bottom: 45px
+  &__heading
+    +col(24)
   &__figure
     +col(10)
     margin-right: 10px
@@ -2796,15 +2801,26 @@ form#signInForm
     color: #d9534f
     border-color: #d9534f
 
-.block-preview
-  margin-left: 16px
-
 .block-title
   word-break: break-word
-
+.block-preview
+  margin-left: 16px
+  margin-left: 54px
+  text-indent: -20px
+.block-title
+  word-break: break-word
+  margin-bottom: 0
 .h-margin
   margin-top: 10px
   margin-bottom: 10px
+.preview-item .h-margin
+  margin-bottom: 0
+.mp-block
+  display: inline-block
+  vertical-align: top
+.preview-item .mp-block .mp-descr 
+  text-indent: -20px
+  margin-left: 26px
 
 .preview-item
   padding-bottom: 5px
