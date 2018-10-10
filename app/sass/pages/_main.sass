@@ -387,12 +387,27 @@
   &__logo
     display: block
     max-width: 134px
-  &__logo-group
-    position: absolute
+    margin: 
+      left: auto
+      right: auto
     +r($md)
-      position: static
+      margin:
+        left: 0
+        right: 0
+  &__logo-group
+    +r($md)
       display: flex
       align-items: center
+  &__signin
+    height: 100%
+  &__btn-group
+    height: 100%
+    display: flex
+    flex-wrap: wrap
+    align-items: center
+  &__btn-toggle
+    .btn__icon
+      font-size: 25px 
 
 
 +comment("section signin-area style")
@@ -416,7 +431,7 @@
   &__mark
     +col(auto)
     display: block
-    padding: 18px 18px 15px 12px
+    //padding: 18px 18px 15px 12px
 
   &__profile
     +col(auto)
