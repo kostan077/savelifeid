@@ -511,7 +511,7 @@
   &__icon
     font-size: 24px
 .hd-mark
-  color: #666
+  color: #000
   text-decoration: none
   transition: all .3s ease-out
   &:hover,
@@ -524,7 +524,7 @@
     text-decoration: none
     color: #337ab7
   &__icon
-    font-size: 24px
+    font-size: 30px
 
 +comment("section in-intro style")
 .in-heading
@@ -2759,8 +2759,6 @@ form#signInForm
     border-radius: 5px
     border-width: 0
     transition: all .3s ease-out
-  &:hover
-    background-color: #fff
   &.btn-sm
     &.btn-primary, &.btn-default, &.btn-success, &.btn-info, &.btn-warning, &.btn-danger
       padding: 7px 12px
@@ -2768,44 +2766,16 @@ form#signInForm
       line-height: 1.5
       border-radius: 3px
 
-.btn-primary
-  border-color: #337ab7
-  &:hover
-    color: #337ab7
-    border-color: #337ab7
+.btn
+  &.btn-xs
+    padding: 3px 7px
 
 .btn-default
   color: #fff
   background-color: #aaa
-  &:hover
-    color: #aaa
 
-.btn-success
-  border-color: #5cb85c
-  &:hover
-    color: #5cb85c
-    border-color: #5cb85c
++comment("bootstrap buttons overrides end")
 
-.btn-info
-  border-color: #5bc0de
-  &:hover
-    color: #5bc0de
-    border-color: #5bc0de
-
-.btn-warning
-  border-color: #f0ad4e
-  &:hover
-    color: #f0ad4e
-    border-color: #f0ad4e
-
-.btn-danger
-  border-color: #d9534f
-  &:hover
-    color: #d9534f
-    border-color: #d9534f
-
-.block-title
-  word-break: break-word
 .block-preview
   margin-left: 16px
   margin-left: 54px
