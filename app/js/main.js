@@ -202,9 +202,9 @@ const SLID = SLID || {};
     },
   }
 
- // # Navbar Collapse
+  // # Navbar Collapse
   // ============================================================================= //
-  GRVE.navbar = {
+  SLID.navbar = {
     init: function() {
       this.$toggler =             $('[data-toggler]')
       this.target =               this.$toggler.data('toggler')
@@ -226,6 +226,23 @@ const SLID = SLID || {};
           self.showNavbar('show')
         }
       })
+
+      $(".sm-nav__link--dropdown").on("click", function(e) {
+        const $this = $(this)
+        const activeDropdown = 'sm-nav__link--active'
+        const isOpen = $this.is(`.${activeDropdown}`) ? true : false
+        const $dropdown = $this.siblings(".sm-nav")
+
+        if (isOpen) {
+          $this.removeClass(activeDropdown)
+          $dropdown.clearQueue().finish().slideUp()
+        } else {
+          $this.addClass(activeDropdown)
+          $dropdown.clearQueue().finish().slideDown()
+        }
+        e.preventDefault()
+      })
+
 
       this.$backdrop.on('click').on('click', function() {
         self.showNavbar('hide')

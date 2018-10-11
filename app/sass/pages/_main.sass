@@ -408,7 +408,128 @@
   &__btn-toggle
     .btn__icon
       font-size: 25px 
+  &__menu
+    +r($md)
+      display: none
 
++comment("section navbar styles")
+.mp-menu
+  position: fixed
+  right: 0
+  top: 0
+  height: 100vh 
+  width: 100vw
+  visibility: hidden
+  z-index: 9999
+  +r($md)
+    position: relative
+    width: auto
+    height: auto
+    visibility: visible
+  &--open
+    visibility: visible
+  &--open &
+    &__backdrop
+      opacity: 1
+    &__box
+      transform: translateX(0%)
+  &__backdrop
+    position: absolute
+    +coverdiv
+    background-color: rgba(0, 0, 0, 0.22)
+    opacity: 0
+    z-index: 100
+    transition: all .5s ease-out
+    +r($md)
+      display: none
+  &__box
+    position: fixed
+    left: 0
+    top: 0
+    width: 100%
+    max-width: 480px
+    height: 100%
+    transform: translateX(-100%)
+    overflow-y: scroll
+    overflow-x: hidden
+    background-color: rgba(251, 251, 251, 0.95)
+    transition: all .5s ease-out
+    z-index: 101
+    +r($md)
+      position: static
+      top: auto
+      right: auto
+      width: auto
+      max-width: none
+      height: auto
+      transform: none
+      overflow: visible
+      background-color: transparent
+  &__list
+    padding: 
+      top: 60px
+      bottom: 60px
+  &__close
+    position: absolute
+    top: 15px
+    right: 15px
+    color: #347bb1
+    font-size: 23px
+    border-radius: 50%
+    overflow: hidden
+    z-index: 10000
+    +r($md)
+      font-size: 30px
+    .btn__icon
+      font-size: inherit
+      margin-right: 0
+    &:active
+      background-color: #347bb1
+      box-shadow: 0 0 0 3px #347bb1
+      color: #fff
+.sm-nav
+  $this: &
+  padding: 
+    left: 0
+  list-style-type: none
+  .sm-nav
+    #{$this}
+      &__link
+        padding:
+          left: 40px
+  &__item
+  &__link
+    position: relative
+    display: block
+    padding: 10px 35px 10px 20px
+    border-top: 1px solid #347bb15c
+    font: 400 14px/17px $main-font
+    color: #000
+    text-decoration: none
+    transition: all .3s ease-out
+    &:hover,
+    &:focus
+      text-decoration: none
+    &:active
+      color: #347bb1
+    &--dropdown
+      &:after
+        content: "\f107"
+        position: absolute
+        display: inline-block
+        right: 10px
+        top: 50%
+        transform: translateY(-50%)
+        margin: auto
+        font: normal normal normal 24px/1 FontAwesome
+        text-rendering: auto
+        -webkit-font-smoothing: antialiased
+        -moz-osx-font-smoothing: grayscale
+      ~ .sm-nav
+        display: none
+    &--active
+      &:after
+        content: "\f106"
 
 +comment("section signin-area style")
 .signin-area
