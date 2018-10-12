@@ -437,7 +437,7 @@ const SLID = SLID || {};
     triggerFormControl(fieldsetId, controlButtonId) {
       const $btnControl =      $(`#${controlButtonId}`)
       const $contents =        $(`#${fieldsetId}`)
-      const toggleClassName =  'pl-info__add--decline btn--primary btn-default'
+      const toggleClassName =  'pl-info__add--decline btn-info btn-default'
       const isContentsErrors = $contents.is('.has-errors')
 
       if($contents.length) 
@@ -460,7 +460,9 @@ const SLID = SLID || {};
 
         const isHideShownIcon = $showIcon.is('.hide')
 
-        if (isHideShownIcon && $hasErrorData.length && !$(toggleButtonText).length)
+        let toggleButtonText
+
+        if (isHideShownIcon && $hasErrorData.length && !$(toggleHtml).length)
           toggleButtonText = templateIcon + toggleButtonText
 
 
@@ -472,7 +474,7 @@ const SLID = SLID || {};
         $toggleContent.clearQueue().finish().slideToggle(() => {
 
           if ($toggleContent.is(':visible')) {
-            let $control = $('input[type=text]:visible', $form).first()
+            let $control = $('input[type=text]:visible', $form).first();
 
             ($control.is('[data-krajee-typeahead]')) ?
               $control = $control.next() :

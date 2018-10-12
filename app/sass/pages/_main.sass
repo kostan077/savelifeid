@@ -44,7 +44,7 @@
     @extend %link
     &:not(:disabled):not(.disabled)
       cursor: pointer
-  &--success
+  //&--success
     padding: 9px 14px
     border-radius: 5px
     border: 2px solid #27ae60
@@ -82,7 +82,7 @@
       &~ #{$this}__icon
         @extend .hidden-accessible
 
-  &--danger
+  //&--danger
     padding: 9px 14px
     border-radius: 5px
     border: 2px solid #FF5A5A
@@ -118,7 +118,7 @@
       color: inherit
       &~ #{$this}__icon
         @extend .hidden-accessible
-  &--primary
+  //&--primary
     padding: 9px 14px
     border-radius: 5px
     border: 2px solid #48b7e5
@@ -160,7 +160,7 @@
       color: inherit
       &~ #{$this}__icon
         @extend .hidden-accessible
-  &--secondary
+  //&--secondary
     padding: 9px 14px
     border-radius: 5px
     border: 2px solid #979797
@@ -197,8 +197,8 @@
   &--submit
     padding: 4px 14px
     border-radius: 5px
-    border: 2px solid #2f80ed
-    background-color: #2f80ed
+    background-color: #389aff
+    border: 2px solid #389aff
     font: 700 12px/16px $main-font
     color: #fff    
     text-decoration: none
@@ -207,13 +207,13 @@
     &:focus
       text-decoration: none
     &:hover
-      background-color: #2f80ed * 1.2
-      border-color: #2f80ed * 1.2
+      background-color: #2f80ed
+      border-color: #2f80ed
       color: #fff
     &:active
-      background-color: transparent
-      color: #2f80ed * 1.1
-      border-color: #2f80ed * 1.1
+      background-color: 215aa6
+      color: #fff
+      border-color: #215aa6
     &:focus
       background-color: #2f80ed * 0.7
       color: #fff
@@ -264,8 +264,8 @@
   &--fluid
     width: 100%
     padding: 9px 0
-  &--primary-left,
-  &--primary-right
+  //&--primary-left,
+  //&--primary-right
     position: relative
     margin: 0
     padding: 8px 15px
@@ -294,7 +294,7 @@
       border-color: #54b9e4 * 1.1
       color: #54b9e4 * 1.1
       background-color: transparent
-  &--primary-left
+  //&--primary-left
     background-color: #bdbdbd
     border: 2px solid #bdbdbd
 
@@ -1556,7 +1556,7 @@
     &--2
       +col
   &__add
-    &--decline
+    //&--decline
       border: 2px solid #979797
       background-color: #979797
       &:hover,
@@ -1943,10 +1943,14 @@
           border: 
             left: 1px solid #000
     a
+      min-height: 25px
       svg
         min-height: 25px
   &__heading
     font-weight: 600
+  &__delete,
+  &__edit
+    height: 100%
   &__delete
     font-size: 13px
     .btn__icon
@@ -2604,7 +2608,7 @@
   &__form
     margin-bottom: 19px
   &__heading
-
+    border-radius: 10px
     color: #fff
 
 +comment("hp-how section style")
@@ -2618,6 +2622,7 @@
 
 +comment("hp-manual section style")
 .hp-manual
+  margin-top: 10px
   padding: 65px 0
   //background-color: #fff
   background-position: calc(50% + 351px) 0
@@ -2891,12 +2896,17 @@ form#signInForm
   &.btn-danger
     font: 600 12px/16px $main-font
     text-transform: uppercase
-    padding: 9px 14px
+    padding: 11px 14px
     border-radius: 5px
     border-width: 0
     transition: all .3s ease-out
   &.btn-sm
-    &.btn-primary, &.btn-default, &.btn-success, &.btn-info, &.btn-warning, &.btn-danger
+    &.btn-primary, 
+    &.btn-default,
+    &.btn-success, 
+    &.btn-info, 
+    &.btn-warning, 
+    &.btn-danger
       padding: 7px 12px
       font-size: 10px
       line-height: 1.5
@@ -2909,6 +2919,36 @@ form#signInForm
 .btn-default
   color: #fff
   background-color: #aaa
+.btn-default
+  &:hover, 
+  &:active, 
+  &.active
+    color: #fff
+    background-color: #979797
+  &:active, 
+  &.active
+    &:hover
+      color: #fff
+      background-color: #6a6a6a
+  &:active, 
+  &.active
+    &:focus,
+    .focus
+      color: #fff
+      background-color: #6a6a6a
+
+.open > .dropdown-toggle.btn-default
+  color: #fff
+  background-color: #979797
+  &:hover
+    color: #fff
+    background-color: #6a6a6a
+  &:focus
+    color: #fff
+    background-color: #6a6a6a
+  &.focus
+    color: #fff
+    background-color: #6a6a6a
 
 +comment("bootstrap buttons overrides end")
 
