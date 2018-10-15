@@ -383,6 +383,7 @@
     margin:
       left: auto
       right: auto
+    justify-content: space-between
   &__menu
   &__logo
     display: block
@@ -647,7 +648,7 @@
   &__icon
     font-size: 24px
 .hd-mark
-  color: #000
+  color: #666
   text-decoration: none
   transition: all .3s ease-out
   &:hover,
@@ -2495,16 +2496,19 @@
   background-position: 50% 50%
   background-size: auto 100%
   min-height: 477px
-  +r(992)
+  +r($lg)
     background-size: auto
   &__container
     margin:
       left: auto
       right: auto
-    max-width: 885px
     padding:
       left: 15px
       right: 15px
+    +r($lg)
+      max-width: 885px
+    +r(1659)
+      max-width: 1050px
   &__row
     display: flex
     flex-wrap: wrap
@@ -2599,17 +2603,106 @@
       color: #7e7e7e
       letter-spacing: normal
 .hp-welcome
+  display: flex
+  align-items: flex-end
   padding: 51px 0 17px
   //background-color: #7d92a4
   background-image: url(/img/welcome.jpg)
   background-position: calc(50% + 35px) 0
+  +r($md)
+  +r($lg)
+    padding:
+      bottom: 27px
+  +r($xl)
+  &__container
+    height: 100%
+    margin-right: 0
+    +r($lg)
+      flex: 0 0 100%
+      max-width: 885px
+    +r(1659)
+      max-width: 1050px
+
   &__col
     margin-left: auto
+    flex-direction: column
+    align-items: center
+    flex: 0 0 85%
+    max-width: 85%
+    +r($sm)
+      +col(24)
+    +r($lg)
+      display: flex
+      flex-wrap: wrap
+      flex-direction: row-reverse
+      align-items: flex-end
   &__form
-    margin-bottom: 19px
+    +col(24)
+    margin:
+      left: auto
+      right: 0
+      bottom: 19px
+    +r($sm)
+      max-width: 285px
+      margin:
+        right: auto
+    +r($lg)
+      margin:
+        left: 0
+        right: 0
+        bottom: 0
+      +col(34%)
+    +r($xl)
+      max-width: 285px
+    +r(1459)
+      margin-left: 0
+    +r(1759)
+      margin:
+        right: 70px
   &__heading
     border-radius: 10px
     color: #fff
+    +r($lg)
+      margin:
+        left: 0
+        right: 30px
+        bottom: 0
+      padding: 10px
+      max-width: 260px
+      background: rgba(255, 255, 255, 0.8)
+      color: #333279
+      font-size: 26px
+      span
+        margin:
+          top: 0
+          bottom: 10px
+        font-size: 18px
+        line-height: 28px
+    +r(1120)
+      margin:
+        right: 60px
+    +r(1299)
+      margin:
+        right: 30px
+      padding: 12px
+      max-width: 370px
+      font-size: 39px
+      line-height: 59px
+      span
+        margin:
+          top: 7px
+        font-size: 27px
+        line-height: 34px
+    +r(1459)
+      margin:
+        right: 130px
+    +r(1659)
+      margin:
+        right: 200px
+    +r(1759)
+      margin:
+        right: 210px
+
 
 +comment("hp-how section style")
 .hp-how
@@ -2618,7 +2711,8 @@
   background-image: url(/img/discover.jpg)
   background-position: calc(50% + 35px) 50%
   &__col
-    +col(36%)
+    +r($md)
+      +col(36%)
 
 +comment("hp-manual section style")
 .hp-manual
@@ -2653,14 +2747,20 @@
   &__row
     display: flex
     flex-wrap: wrap
-    justify-content: center
+    justify-content: space-around
+    +r($md)
+      justify-content: center
   &__col
     position: relative
     width: 100%
     min-height: 1px
     padding-right: 15px
     padding-left: 15px
-    +col(6)
+    +col(auto)
+    +r($md)
+      +col(8)
+    +r($lg)
+      +col(6)
 .hp-sub-heading
   margin:
     top: 0
@@ -2715,7 +2815,8 @@
   min-height: 525px
   &__container
   &__col
-    +col(36%)
+    +r($md)
+      +col(36%)
 
 +comment("footer section style")
 .ft-footer
