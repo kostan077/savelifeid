@@ -375,7 +375,7 @@
 .header
   &#header
     +r($md)
-      padding: 5px 0
+      padding: 12px 0
   &__container
     display: flex
     flex-wrap: wrap
@@ -814,15 +814,14 @@
     @extend .img-fluid
     +col(60px)
 .cm-item
-
   position: relative
   display: flex
   flex-wrap: wrap
   align-items: center
   margin-left: 49px
   min-height: 97px
-  padding-left: 60px
-  background-color: #dadada
+  padding-left: 64px
+  background-color: #dadada8c
   border-radius: 0 10px 10px 0
   font: 500 16px/20px $main-font
   color: #000
@@ -839,7 +838,7 @@
     box-shadow: 0 0 5px 3px #d9edf7
   &:focus
     color: #337ab7
-  +r($md)
+  //+r($md)
     margin:
       left: 0
     padding: 7px 7px 7px 10px
@@ -851,7 +850,7 @@
     left: 0
     transform: translate(-50%, -50%)
     margin-right: 16px
-    +r($md)
+    //+r($md)
       position: static
       transform: none
       top: auto
@@ -948,14 +947,17 @@
     flex-direction: column
     border-top: 1px solid #bdbdbd
     justify-content: center
+    max-width: 996px
+    margin:
+      left: auto
+      right: auto
     +r($md)
       flex-direction: row
+      justify-content: space-around
 .ft-nav
   padding: 13px 20px
   +r($md)
-    padding: 
-      top: 26px
-      bottom: 26px
+    padding: 44px
 
   &__link
     display: block
@@ -968,9 +970,7 @@
     transition: all .3s ease-out
     +r($md)
       display: inline
-      padding: 
-        top: 26px
-        bottom: 26px
+      font-size: 14px
 
 +comment("page Medical Profile")
 
@@ -1768,7 +1768,7 @@
         option[hidden]
           display: none
   &[type=password]
-    font: bold
+    font-weight: 700
     font-size: 12px
     letter-spacing: 2px
     +placeholder
@@ -2274,6 +2274,7 @@
       td,
       th
         padding: 10px 12px
+        vertical-align: middle
         border: 
           top: none
           right: 1px solid #fff
@@ -2311,6 +2312,7 @@
             right:  12px
             bottom: 10px
             left: 112px
+          vertical-align: top
           float: left
           width: 100%
           border: 1px solid #a8a8a8
@@ -2404,25 +2406,20 @@
       +col(24)
       margin-right: 0
   &__btn-group
-    +col(14)
+    +col
     +r($md)
       +col(24)
 
 .ct-btn-group
+  $this: &
   display: flex
   flex-wrap: wrap
   flex-direction: column-reverse
-  margin:
-    left: -5px
-    right: -5px
   +r($md)
     flex-direction: row
   &__item
     margin: 
       bottom: 15px
-    padding: 
-      left: 5px
-      right: 5px
     +r($md)
       +col
       margin:
@@ -2430,6 +2427,11 @@
     &--right
       +r($md)
         +col(auto)
+        margin-left: 10px
+      #{$this}__btn
+        padding:
+          top: 7px !important
+          bottom: 7px !important
   &__btn
 .ct-figure
   margin-bottom: 15px
@@ -2441,8 +2443,8 @@
       right: auto
     width: 275px
     height: 321px
-    object-fit: cover
-    font-family: 'object-fit: cover;'
+    object-fit: contain
+    font-family: 'object-fit: contain;'
 
 +comment("section bl-billing style")
 
@@ -2615,9 +2617,10 @@
       bottom: 27px
   +r($xl)
   &__container
-    height: 100%
     margin-right: 0
     +r($lg)
+      margin:
+        top: auto
       flex: 0 0 100%
       max-width: 885px
     +r(1659)
@@ -2720,8 +2723,6 @@
   padding: 65px 0
   //background-color: #fff
   background-position: calc(50% + 351px) 0
-  &__container
-    max-width: 763px
   &__header
     text-align: right
   &__heading
@@ -2905,7 +2906,7 @@
 .tt-menu .tt-suggestion
   white-space: normal !important
 
-.medicalRecordForm .pl-info__upload
+//.medicalRecordForm .pl-info__upload
   max-width: 392px
 
 .fs-11
